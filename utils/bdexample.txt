@@ -1,0 +1,13 @@
+aqui pondre inserts comunes para la base de datos:
+
+pendiente a borrar y meter en los scripts sql
+insert into sexo values ( 1, 'hombre' ), (2 , 'mujer');
+insert into privilegio values (1, 'usuario');
+insert into ctipo_bebida values (1 , 'agua', 'agua') ;
+insert into datos_bebida values (1 , 100, 0,0,0, 1 ) ;
+
+Pefil de prueba: 
+insert into usuario values (1, 'Daniel', '123', )
+
+correr el 9.0
+02:08 p. m. 12/04/2023

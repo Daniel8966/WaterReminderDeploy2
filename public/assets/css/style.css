@@ -1,0 +1,259 @@
+/*tablas*/
+#customers {
+	font-family: Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+    max-width: 300px;;
+	margin-left: auto;
+	margin-right: auto;
+  
+  }
+  
+  #customers td, #customers th {
+	border: 1px solid #ddd;
+	padding: 8px;
+    max-width: 300px;
+  }
+  
+  #customers tr:nth-child(even){background-color: #E0E0E2;}
+  
+  #customers tr:hover {background-color: #ddd;}
+  
+  #customers th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: center;
+	background-color: #ffffff;
+	color: rgb(71, 71, 71);
+    max-width: 300px;;
+  }
+
+
+/*
+.gallery {
+    margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 180px;
+}
+*/
+
+
+
+/*Select*/
+.caja{
+    margin:20px auto 40px auto;	
+    border-radius: 10px;
+}
+select {
+    background: #f5f5f5;
+    border: #74e447;
+    font-size: 14px;
+    height: 30px;
+    padding: 5px;
+    width: 250px;
+    text-align: center;
+    
+}
+
+/*Tarjetas de bebidas*/
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: #2196F3;
+    padding: 10px;
+  }
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+  }
+
+
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+    
+    
+}
+
+
+
+
+.price {
+    color: grey;
+    font-size: 15px;
+}
+
+
+
+/*Boton ingresar*/
+.button{
+
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #58b7fbe9;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+    
+}
+
+.button :hover {
+    opacity: 0.7;
+}
+.button {
+    transition-duration: 0.4s;
+  }
+  
+.button:hover {
+    background-color: #ffffff; /* Green */
+    color: rgb(0, 0, 0);
+}
+
+    
+
+
+
+/*Mas informacion*/
+.teble{
+    background-color: #ffffff;
+    color: #1c3ac2;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-size: 15px;
+    
+
+}
+.teble :hover {
+    opacity: 0.7;
+}
+.teble {
+    transition-duration: 0.4s;
+  }
+  
+.teble:hover {
+    background-color: #ebebeb;
+    color: #5289ff;
+}
+
+
+
+/*Boton que cae*/
+.collapsible {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+padding: 0 18px;
+display: none;
+overflow: hidden;
+background-color: #f1f1f1;
+
+}
+
+/* Gallery */
+/* Float four columns side by side */
+.column {
+    float: right;
+    width: 25%;
+    padding: 0 10px;
+   
+  }
+  
+  /* Remove extra left and right margins, due to padding in columns */
+  .row {margin: 0 -5px;}
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  /* Responsive gallery */
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 50%;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }  
+
+  @media screen and (max-width: 375px) {
+    .column {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }  
+
+
+  .search {
+    width: 100%;
+    position: relative;
+    display: flex;
+    height: 100px;
+  }
+  
+  .searchTerm {
+    width: 200%;
+    border: 3px solid #00B4CC;
+    border-right: none;
+    padding: 5px;
+    height: 20px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #9DBFAF;
+    height: 36px;
+  }
+  
+  .searchTerm:focus{
+    color: #00B4CC;
+    height:36px;
+  }
+  
+  .searchButton {
+    width: 50px;
+    height: 36px;
+    border: 1px solid #00B4CC;
+    background: #00B4CC;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  /*Resize the wrap to see the search bar change!*/
+  .wrap{
+    width: 30%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }

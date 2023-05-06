@@ -1,0 +1,24 @@
+//base default para una ruta modularizada con router
+//ubicacion: router/TU_ARCHIVO.js
+
+//-------------------------------------TU_ARCHIVO.JS------------------------------
+
+import express from 'express';
+const router = express.Router();
+import manageSession from './sesiones.js';
+import {connection} from '../database/DatabaseConexion.js'
+
+router.get('/', (req, res, next) => {
+      if (manageSession(req, res, next, 'titulo de la pagina')) {
+         //Aqui el codigo de la ruta 
+      }
+});
+
+
+export default router;
+
+
+ //-------------------------------------app.js------------------------------
+
+import nombreRuta from './router/TU_ARCHIVO.js'
+app.use('/home' , nombreRuta );
