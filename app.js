@@ -36,7 +36,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 
-//Delcara la app
+//Delcara la app con framework de express
 const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -105,3 +105,4 @@ app.listen(PORT || 3150, (req, res) => {
     console.log('http:/localhost:' + PORT);
 
 })
+
