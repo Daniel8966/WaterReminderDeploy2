@@ -8,10 +8,13 @@ const router = express.Router();
 import manageSession from './sesiones.js';
 import {connection} from '../database/DatabaseConexion.js'
 
-router.get('/', (req, res, next) => {
-      if (manageSession(req, res, next, 'titulo de la pagina')) {
+
+//utilizar manageSession como middleware usa un string para el nombre de la pagina
+
+router.get('/', manageSession('nombre de la pagina ')(req, res, next) => {
+  
          //Aqui el codigo de la ruta 
-      }
+      
 });
 
 

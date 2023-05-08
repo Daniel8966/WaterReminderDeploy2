@@ -44,7 +44,7 @@ router.post('/', async (req, res, next) => {
         if (error) {
             console.log(error)
             res.status('500')
-            res.render('registrar', {mensaje : false})
+            res.render('registrar', { mensaje: false })
 
         }
         if (respuesta.length > 0) {

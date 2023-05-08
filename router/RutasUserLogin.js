@@ -43,14 +43,14 @@ router.post('/', async (req, res, next) => {
                     const checkPasswor = await comparar(password, respuesta[0].password)
                     if (checkPasswor) {
 
-                            //ingreso de usuaori
+                        //ingreso de usuaorio
                         if (respuesta[0].Privilegio_idPrivilegio == 1) {
                             console.log('ingreso de usuario')
                             console.log('las contraseñas coinciden')
                             console.log('Ingreso exitoso al sistema')
                             req.session.loggedin = true; //Creando la sesion
                             res.redirect('/home')
-                            
+
                             //ingreso de admin
                         } else if (respuesta[0].Privilegio_idPrivilegio == 2) {
                             console.log('ingreso de admin')

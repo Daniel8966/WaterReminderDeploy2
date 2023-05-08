@@ -11,12 +11,7 @@ router.get('/', (req, res) => {
 
 })
 
-router.get('/Pruebas', (req, res) => {
-    if (req.session.loggedin && req.session.admin) {
-        res.render('pruebas')
-    }
 
-})
 
 router.get('/perfilAdmin', (req, res) => {
     if (req.session.loggedin && req.session.admin) {
