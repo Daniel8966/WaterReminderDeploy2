@@ -40,3 +40,5 @@ function generarRegistros(idPersona) {
     return (querygrandota += `;`);
 
 }
+
+console.log(generarRegistros('23'))

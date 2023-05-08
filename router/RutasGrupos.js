@@ -167,7 +167,7 @@ router.post('/unirseGrupo', (req, res, next) => {
     }
 });
 
-router.get('/borrarGrupo', (req, res, next) => {
+router.post('/borrarGrupo', (req, res, next) => {
     if (manageSession(req, res, next, 'borrar grupo')) {
         //este id se obtiene de la sesion
         var idPersona = req.session.idPersona;

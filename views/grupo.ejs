@@ -77,13 +77,16 @@
                                 </div>
                                 <%})%>
                                     <% if(admon===1){ %>
-                                        <button class="btn btn-primary" data-bss-hover-animate="rubberBand"
+                                        <form action="/grupos/borrarGrupo" method="post">   
+                                            <input type="hidden" name="codigo" value="<%=codigo%>">
+                                            <input type="submit" class="btn btn-primary" data-bss-hover-animate="rubberBand"
                                             type="submit"
-                                            style="position: static;display: inline-block;margin-left: 30%;background: rgb(16,210,247);border-style: solid;border-color: rgb(16,210,247);border-bottom-style: solid;border-bottom-color: rgb(16,210,247);font-size: 18px;margin-top: 1rem;">
-                                            <a href="">
-                                                Borrar grupo
-                                            </a>
-                                        </button>
+                                            style="position: static;display: inline-block;margin-left: 30%;background: rgb(16,210,247);border-style: solid;border-color: rgb(16,210,247);border-bottom-style: solid;border-bottom-color: rgb(16,210,247);font-size: 18px;margin-top: 1rem;"
+                                            value="Borrar">
+                                            
+                                       
+                                        </form>
+                                        
                                         <%}else{ %>
                                             <form action="/grupos/salirGrupo" method="post">   
                                                 <input type="hidden" name="codigo" value="<%=codigo%>">
