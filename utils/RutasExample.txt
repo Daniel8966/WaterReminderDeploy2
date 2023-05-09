@@ -25,3 +25,5 @@ export default router;
 
 import nombreRuta from './router/TU_ARCHIVO.js'
 app.use('/home' , nombreRuta );
+
+amongus
