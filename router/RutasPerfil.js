@@ -153,7 +153,7 @@ router.post('/actualizarPerfil', manageSession('actualizar datos perfil'), async
 
 });
 
-router.post('/actualizarContra', manageSession('actualizar password'), async (req, res, next) => {
+router.post('/actualizarPassword', manageSession('actualizar password'), async (req, res, next) => {
     //en esta ruta haremos que el usaurio actualize su contrasena en la base de datos 
 
     const idUsuario = req.session.idUsuario

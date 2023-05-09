@@ -54,8 +54,9 @@
                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle"
                   width="150">
                 <div class="mt-3">
-                  <h4>Nombre</h4>
-                  <p class="text-secondary mb-1">Administrador de Water Reminder</p>
+                  <h4>Nombre : <%=nombre%>
+                  </h4>
+                  <p class="text-secondary mb-1">Usuario de Water Reminder</p>
                   <a href="/logout"><button class="btn btn-primary" href="/logout">Cerrar sesión</button></a>
                 </div>
               </div>
@@ -71,7 +72,7 @@
                   <h6 class="mb-0">Nombre</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  Kenneth Valdez
+                  <%=nombre%>
                 </div>
               </div>
               <hr>
@@ -80,7 +81,7 @@
                   <h6 class="mb-0">Sexo</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  Hombre
+                  <%=sexo%>
                 </div>
               </div>
               <hr>
@@ -89,7 +90,7 @@
                   <h6 class="mb-0">Email</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  fip@jukmuh.al
+                  <%=email%>
                 </div>
               </div>
               <hr>
@@ -99,16 +100,16 @@
                   <h6 class="mb-0">Teléfono</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  (239) 816-9029
+                  <%=telefono%>
                 </div>
               </div>
               <hr>
               <div class="row">
                 <div class="col-sm-3">
-                  <h6 class="mb-0">Fecha de nacimiento</h6>
+                  <h6 class="mb-0">Edad</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  27 Abril 2005
+                  <%=edad%>
                 </div>
               </div>
               <hr>
@@ -117,7 +118,7 @@
                   <h6 class="mb-0">Altura</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  170 cm
+                  <%=altura%> cm
                 </div>
               </div>
               <hr>
@@ -126,7 +127,7 @@
                   <h6 class="mb-0">Peso</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  70 kg
+                  <%=peso%> kg
                 </div>
               </div>
               <hr>
@@ -135,7 +136,7 @@
                   <h6 class="mb-0">Hora de dormir</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  11:00 p.m.
+                  <%=horaDormir%> .
                 </div>
               </div>
               <hr>
@@ -144,7 +145,7 @@
                   <h6 class="mb-0">Hora de despertar</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  8:00 a.m.
+                  <%=horaDespertar%>
                 </div>
               </div>
               <hr>
@@ -153,13 +154,13 @@
                   <h6 class="mb-0">Actividad Física</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  Ninguna
+                  <%=actFisica%> minutos
                 </div>
               </div>
               <hr>
               <div class="row">
                 <div class="col-sm-12">
-                  <a class="btn btn-info " target="__blank" href="Editar.html">Editar</a>
+                  <a class="btn btn-info " target="__blank" href="perfil/editarPerfil">Editar</a>
                 </div>
               </div>
             </div>
@@ -174,8 +175,8 @@
 
     </div>
   </div>
-  <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="/assets/js/bs-init.js"></script>
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/bs-init.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
@@ -183,10 +184,9 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
-  <script src="/assets/js/Ludens---1-Dark-mode-Index-Table-with-Search-Filters.js"></script>
-  <script src="/assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-1.js"></script>
-  <script src="/assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20.js"></script>
-  <script src="/assets/js/theme.js"></script>
+  <script src="assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-1.js"></script>
+  <script src="assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20.js"></script>
+  <script src="assets/js/theme.js"></script>
 </body>
 
 </html>
