@@ -22,7 +22,7 @@ function sesionAdmin(nombre) {
 //------RUTAS DE LAS PAGINAS------
 router.get('/', sesionAdmin('admin usuarios'), manageSession('admin usuarios'), async (req, res) => {
 
-    const query = `select idUsuario, Usuario, email from usuario;`
+    const query = `SELECT  idUsuario, idPersona, Usuario,  email FROM persona INNER JOIN usuario ON persona.Usuario_idUsuario=usuario.idUsuario;`
     connection.query(query, async (err, respuesta, fields) => {
         if (err) return console.log("Error", err);
 
@@ -31,10 +31,34 @@ router.get('/', sesionAdmin('admin usuarios'), manageSession('admin usuarios'), 
 
 })
 
+router.post('/delUsuario', sesionAdmin('admin pruebas'), manageSession('admin pruebas'), async (req, res) => {
+
+
+    const query = `delete from consumo_agua where Persona_idPersona idUsuario, Usuario, email from usuario;`
+
+    connection.query(query, async (err, respuesta, fields) => {
+        if (err) return console.log("Error", err);
+
+        res.redirect('/admin');
+    })
+
+})
+
+
+
+router.get('/pruebas', sesionAdmin('admin pruebas'), manageSession('admin pruebas'), async (req, res) => {
+
+
+    res.render('pruebas')
+
+
+})
+
+
 
 
 router.get('/perfilAdmin', sesionAdmin('perfil admin '), manageSession('perfil admin'), (req, res) => {
-    
+
     const idUsuario = req.session.idUsuario;
 
     const query = `select * from persona join usuario where   Usuario_idUsuario =  idUsuario and idUsuario = ?  ;`
@@ -63,7 +87,7 @@ router.get('/perfilAdmin', sesionAdmin('perfil admin '), manageSession('perfil a
                 actFisica: respuesta[0].Actividad_fisica
             })
     })
-    
+
 
 
 })
