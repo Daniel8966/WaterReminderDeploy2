@@ -2,12 +2,12 @@
 import express, { query } from 'express';
 const router = express.Router();
 import {connection} from '../database/DatabaseConexion.js'
-
+import manageSession from './sesiones.js';
 
 
 //------RUTAS DE LAS PAGINAS------
-router.get('/',  async (req, res) => {
-    if (req.session.loggedin && req.session.admin) {
+router.get('/', manageSession('admin usuarios'), async (req, res) => {
+    if (req.session.admin) {
         const query = `select idUsuario, Usuario, email from usuario;`
         connection.query( query , async (err, respuesta, fields) => {
             if (err) return console.log("Error", err);
@@ -16,6 +16,8 @@ router.get('/',  async (req, res) => {
 
       })
         
+    }else{
+        res.redirect('/login')
     }
 
 })
