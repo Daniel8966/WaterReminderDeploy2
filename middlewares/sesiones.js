@@ -13,4 +13,7 @@ function manageSession(titulo) {
     }
   }
 }
-export default manageSession;
+
+
+
+export default manageSession

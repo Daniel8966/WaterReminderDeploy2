@@ -1,7 +1,7 @@
 import { connection } from '../database/DatabaseConexion.js'
 //rutas de home 
 import express from 'express';
-import manageSession from './sesiones.js';
+import manageSession   from '../middlewares/sesiones.js';
 const router = express.Router();
 
 

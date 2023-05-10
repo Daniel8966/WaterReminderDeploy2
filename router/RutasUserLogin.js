@@ -2,12 +2,11 @@
 
 import express from 'express';
 const router = express.Router();
-import manageSession from './sesiones.js';
 import { connection } from '../database/DatabaseConexion.js'
 import { comparar, encriptar } from '../database/encriptar.js'
 
 
-router.post('/', async (req, res, next) => {
+router.post('/',   async (req, res, next) => {
 
     const email = req.body.email;
     const password = req.body.password;

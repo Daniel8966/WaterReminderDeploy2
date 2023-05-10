@@ -2,7 +2,9 @@ import express, { query } from 'express';
 
 import { comparar } from '../database/encriptar.js';
 import { connection } from '../database/DatabaseConexion.js'
-import manageSession from './sesiones.js';
+
+import manageSession   from '../middlewares/sesiones.js';
+
 
 const router = express.Router();
 

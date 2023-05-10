@@ -2,7 +2,6 @@
 
 import express from 'express';
 const router = express.Router();
-import manageSession from './sesiones.js';
 import { connection } from '../database/DatabaseConexion.js'
 import { encriptar } from '../database/encriptar.js'
 

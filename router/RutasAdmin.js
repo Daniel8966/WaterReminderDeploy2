@@ -2,7 +2,9 @@
 import express, { query } from 'express';
 const router = express.Router();
 import { connection } from '../database/DatabaseConexion.js'
-import manageSession from './sesiones.js';
+import manageSession from '../middlewares/sesiones.js';
+
+
 
 function sesionAdmin(nombre) {
     return function (req, res, next) {
@@ -17,7 +19,6 @@ function sesionAdmin(nombre) {
 
     }
 }
-
 
 //------RUTAS DE LAS PAGINAS------
 router.get('/', sesionAdmin('admin usuarios'), manageSession('admin usuarios'), async (req, res) => {
@@ -73,8 +74,8 @@ router.post('/delUsuario', sesionAdmin('admin pruebas'), manageSession('admin pr
     })
 
 
-    
-    
+
+
 
 })
 
