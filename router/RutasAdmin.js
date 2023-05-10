@@ -32,43 +32,49 @@ router.get('/', sesionAdmin('admin usuarios'), manageSession('admin usuarios'), 
 })
 
 router.post('/delUsuario', sesionAdmin('admin pruebas'), manageSession('admin pruebas'), async (req, res) => {
+
     const idPersona = req.body.idPersona
+    const idUsuario = req.body.idUsuario
+    console.log('borrar persona' + idPersona)
+    console.log('borrar usurio' + idUsuario)
 
     //borrar a los participantes del grupo que el usuario creo 
     const query1 = `DELETE t1.*
      FROM persona_has_cgrupos AS t1 
      INNER JOIN cgrupos AS t2
       ON t1. CGrupos_idCGrupos = t2.idCGrupos WHERE t2.adminID = ? ;`
-    connection.query(query1, [idPersona],  async (err, respuesta, fields) => {
+    connection.query(query1, [idPersona], async (err, respuesta, fields) => {
         if (err) return console.log("Error", err);
     })
 
     //Borrar grupos que el usuario creo
     const query2 = `delete from cgrupos where adminID = ?;`
-    connection.query(query2, [idPersona],  async (err, respuesta, fields) => {
+    connection.query(query2, [idPersona], async (err, respuesta, fields) => {
         if (err) return console.log("Error", err);
     })
 
     //Borrar los consumos del usuario 
     const query3 = `delete from consumo_agua where Persona_idPersona = ? ; `
-    connection.query(query3, [idPersona],  async (err, respuesta, fields) => {
+    connection.query(query3, [idPersona], async (err, respuesta, fields) => {
+        if (err) return console.log("Error", err);
+    })
+
+    //Borrar a la persona 
+    const query5 = `delete from persona where idPersona = ?`
+    connection.query(query5, [idPersona], async (err, respuesta, fields) => {
         if (err) return console.log("Error", err);
     })
 
     //Borrar el usuario 
-    const query4 =`DELETE t1.*
-    FROM usuario AS t1 INNER JOIN persona AS t2
-    ON t1.idUsuario = t2.Usuario_idUsuario
-    WHERE t2.idPersona = ? ; `
-    connection.query(query4, [idPersona],  async (err, respuesta, fields) => {
+    const query4 = `delete from usuario where idUsuario = ? `
+    connection.query(query4, [idUsuario], async (err, respuesta, fields) => {
         if (err) return console.log("Error", err);
+        return res.redirect('/admin');
     })
+
+
     
-    //Borrar a la persona 
-    const query5 =`delete from persona where idPersona = ?`
-    connection.query(query5, [idPersona],  async (err, respuesta, fields) => {
-        if (err) return console.log("Error", err);
-    })
+    
 
 })
 
@@ -81,8 +87,6 @@ router.get('/pruebas', sesionAdmin('admin pruebas'), manageSession('admin prueba
 
 
 })
-
-
 
 
 router.get('/perfilAdmin', sesionAdmin('perfil admin '), manageSession('perfil admin'), (req, res) => {
