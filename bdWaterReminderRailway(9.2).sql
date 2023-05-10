@@ -221,3 +221,10 @@ KEY_BLOCK_SIZE = 2;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+insert into sexo values ( 1, 'hombre' ), (2 , 'mujer');
+insert into privilegio values (1, 'usuario');
+insert into privilegio values ( 2 , 'admin');
+insert into ctipo_bebida values (1 , 'agua', 'agua') ;
+insert into datos_bebida values (1 , 100, 0,0, 1 ) ;
