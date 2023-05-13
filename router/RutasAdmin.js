@@ -36,8 +36,6 @@ router.post('/delUsuario', sesionAdmin('admin pruebas'), manageSession('admin pr
 
     const idPersona = req.body.idPersona
     const idUsuario = req.body.idUsuario
-    console.log('borrar persona' + idPersona)
-    console.log('borrar usurio' + idUsuario)
 
     //borrar a los participantes del grupo que el usuario creo 
     const query1 = `DELETE t1.*
@@ -88,6 +86,25 @@ router.get('/pruebas', sesionAdmin('admin pruebas'), manageSession('admin prueba
 
 
 })
+
+
+
+router.post('/updateUser', sesionAdmin('admin update User'), manageSession('admin update user'), async (req, res) => {
+    const nombre = req.body.nombre;
+    const email = req.body.correo;
+    const idUsuario = req.body.idUsuario
+    console.log(email)
+    
+    const query4 = `update usuario set Usuario=?, email = ? where idUsuario = ? `
+     connection.query(query4, [nombre, email, idUsuario], async (err, respuesta, fields) => {
+         if (err) return console.log("Error", err);
+         return res.redirect('/admin');
+     })
+ 
+
+
+})
+
 
 
 router.get('/perfilAdmin', sesionAdmin('perfil admin '), manageSession('perfil admin'), (req, res) => {

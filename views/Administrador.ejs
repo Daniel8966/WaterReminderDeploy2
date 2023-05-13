@@ -71,7 +71,9 @@
                                     </tr>
                                 </thead>
 
-                                <% usuarios.forEach((user)=>{%>
+                                <%  var i = 0;
+                                usuarios.forEach((user)=>{%>
+                                    i++;
                                     <form action="admin/delUsuario" id="borrar-usuario" method="post">
                                         <input type="hidden" value="<%=user.idPersona%>" name="idPersona">
                                         <input type="hidden" value="<%=user.idUsuario%>" name="idUsuario">
@@ -93,10 +95,10 @@
                                                 <td class="text-center align-middle"
                                                     style="max-height: 60px;height: 60px;">
                                                     <a class="btn btnMaterial btn-flat success semicircle" role="button"
-                                                        href="#" style="color: rgb(0,197,179);"><i class="fas fa-pen"
-                                                            style="color: rgb(4,75,192);"></i></a>
+                                                        href="#modal<%=i%>" style="color: rgb(0,197,179);"><i
+                                                            class="fas fa-pen" style="color: rgb(4,75,192);"></i></a>
                                                     <a onclick="event.preventDefault(); document.getElementById('borrar-usuario').submit();"
-                                                     class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover"
+                                                        class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover"
                                                         role="button" style="margin-left: 5px;" data-bs-toggle="modal"
                                                         data-bs-target="#delete-modal" href="#"><i
                                                             class="fas fa-trash btnNoBorders"
@@ -104,8 +106,36 @@
                                                 </td>
                                             </tr>
                                     </form>
+
+                                    <div id="modal<%=i%>" class="modalmask" >
+
+                                        <div class="modalboxs movedown" style="background-color: black;">
+                                            <form action="admin/updateUser" method="post">
+                                                <a href="#close" title="Close" class="close">X</a>
+                                                <input type="hidden" value="<%=user.idUsuario%>" name="idUsuario">
+                                                <br><br>
+                                                <label>
+                                                    <font color="white">nombre</font>
+                                                </label>
+                                                <input type="text" name="nombre">
+                                                <br><br>
+                                                <label>
+                                                    <font color="white">email</font>
+                                                </label>
+                                                <input type="text" name="correo">
+                                                <br><br>
+                                                <input class="input" type="submit" value="Enviar">
+
+
+
+                                            </form>
+
+                                        </div>
+                                    </div>
                                     <% } )%>
                                         </tbody>
+
+                                    
                             </table>
                         </div>
                     </div>

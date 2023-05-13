@@ -144,3 +144,115 @@
   .msr{
     margin-top: -47px;
   }
+
+
+
+
+  .modalmask1 {
+    position: fixed;
+    font-family: sans-serif;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 99999;
+    opacity:0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+  }
+  .inputid{
+  background-color: rgb(2, 92, 145);
+  border: rgb(2, 92, 145);
+  color: white;
+  width: 108px;
+  border-radius: 7px;
+  padding-right: 12px;
+  padding-left: 12px;
+  }
+  h3{
+  color: #fff;
+  }
+  .input{
+  background-color:rgb(0,167,224);
+  border-radius: 7px;
+  border: rgb(2, 92, 145);
+  color: white;
+  padding-right: 12px;
+  padding-left: 12px;
+  }
+  .input3{
+  background-color: rgb(2, 92, 145);
+  border-radius: 7px;
+  border: rgb(2, 92, 145);
+  color: white;
+  padding-right: 12px;
+  padding-left: 12px;
+  width: 209px;
+  }
+  .modalmask1:target {
+    opacity:1;
+    pointer-events: auto;
+  }
+  .modalboxs{
+  width: 400px;
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgb(0,133,255) 100%);
+  position: relative;
+  padding: 5px 20px 13px 35px;
+  border-radius:15px;
+  -webkit-transition: all 500ms ease-in;
+  -moz-transition: all 500ms ease-in;
+  transition: all 500ms ease-in;
+   
+  }
+  .movedowns {
+  margin: 0 auto;
+  }
+  .rotate {
+  margin: 10% auto;
+  -webkit-transform: scale(-5,-5);
+  transform: scale(-5,-5);
+  }
+  .resize {
+  margin: 10% auto;
+  width:0;
+  height:0;
+  
+  }
+  .modalmask1:target .movedowns{       
+  margin:10% auto;
+  }
+  .modalmask1:target .rotate{     
+  transform: rotate(360deg) scale(1,1);
+      -webkit-transform: rotate(360deg) scale(1,1);
+  }
+  
+  .modalmask1:target .resize{
+  width:400px;
+  height:50px;
+  }
+  .close {
+  background: #0c88d9;
+  color: white;
+  line-height: 25px;
+  position: absolute;
+  right: 8px;
+  text-align: center;
+  top: 5px;
+  width: 24px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius:3px;
+  
+  }
+  
+  .close:hover {
+  background: #58c7fa;
+  color:#222;
+  }
+
+  .msr{
+    margin-top: -47px;
+  }

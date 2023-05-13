@@ -1,7 +1,6 @@
 import { connection } from '../database/DatabaseConexion.js'
 import express from 'express';
 import manageSession   from '../middlewares/sesiones.js';
-
 const router = express.Router();
 
 
