@@ -100,6 +100,12 @@ import rutasAdmin from './router/RutasAdmin.js'
 app.use('/admin', rutasAdmin)
 
 
+import pruebasAdmin from './tests/prueba1.js'
+app.use('/prueba1', pruebasAdmin)
+
+
+
+export default app;
 //DEPLOY EN EL PUERTO
 app.listen(PORT || 3150, (req, res) => {
     console.log('http:/localhost:' + PORT);
