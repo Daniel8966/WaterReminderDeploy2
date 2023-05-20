@@ -93,12 +93,12 @@ router.post('/updateUser', sesionAdmin('admin update User'), manageSession('admi
     const nombre = req.body.nombre;
     const email = req.body.correo;
     const idUsuario = req.body.idUsuario
-    console.log(email)
+    console.log(idUsuario)
     
     const query4 = `update usuario set Usuario=?, email = ? where idUsuario = ? `
      connection.query(query4, [nombre, email, idUsuario], async (err, respuesta, fields) => {
          if (err) return console.log("Error", err);
-         return res.redirect('/admin');
+         return res.redirect( 302, '/admin');
      })
  
 
