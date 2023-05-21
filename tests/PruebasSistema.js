@@ -87,8 +87,13 @@ router.get('/checkStatus', sesionAdmin('admin pruebas'), manageSession('admin pr
 
                 res.render('pruebas', { mensaje: resultadosPrueba })
             } else {
-                console.log(`error al hacer ping a `);
-                let mensaje = 'El dominio: ' + host + ' no admite pings aunque este en linea ';
+               
+                let mensaje ;
+                if (status.includes('failed')){
+                    mensaje = `Error al hacer ping al dominio ${host}` 
+                }else{
+                    mensaje = 'El dominio: ' + host + ' no admite pings aunque este en linea ';
+                }
                 let resultadosPrueba = [status, mensaje]
                 res.render('pruebas', { mensaje: resultadosPrueba })
             }
@@ -128,7 +133,7 @@ router.get('/checkStatusChat', sesionAdmin('admin pruebas'), manageSession('admi
 
                 res.render('pruebas', { mensaje: resultadosPrueba })
             } else {
-                console.log(`error al hacer ping a `);
+        
                 let mensaje ;
                 if (status.includes('failed')){
                     mensaje = `Error al hacer ping al dominio ${host}` 
