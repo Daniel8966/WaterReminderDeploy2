@@ -34,10 +34,10 @@ router.get('/systemStatus', async (req, res) => {
 })
 
 
-async function verificarEstado() {
+async function verificarEstado(host) {
     let status;
     try {
-        const response = await axios.get('http://localhost:3150/pruebas/systemStatus');
+        const response = await axios.get(host);
         if (response.status === 200 && response.data === 'En línea') {
             console.log('El proyecto está en linea');
             return status = `El proyecto esta en linea`;
@@ -58,18 +58,23 @@ async function verificarEstado() {
 
 
 router.get('/checkStatus', sesionAdmin('admin pruebas'), manageSession('admin pruebas'), async (req, res) => {
-    let status = await verificarEstado();
+
+    //checar la ruta del system status
+    let host1 = 'http://localhost:3150/pruebas/systemStatus'
+    let status = await verificarEstado(host1);
+
+    //hacer un ping al localhost
     const host = 'localhost';
     ping.promise.probe(host, { port: PORT, timeout: 10 })
 
         .then((result) => {
             if (result.alive) {
-              
+
                 let minTime = 'Tiempo mínimo:' + result.min;
                 let maxtime = 'Tiempo máximo:' + result.max;
                 let Promedio = 'Promedio de tiempo:' + result.avg;
                 let mensaje = `sistemas operando en ${host}:${PORT}`
-             
+
 
 
                 //Obtener informacion de los paquetes que se enviaron para hacer el ping con result.otuput y dividir el string
@@ -78,12 +83,14 @@ router.get('/checkStatus', sesionAdmin('admin pruebas'), manageSession('admin pr
                 let packetInfoStr2 = packetInfoStr1[1].split('Tiempos aproximados')
 
                 //mandar todo como un array 
-                let resultadosPrueba = [status,packetInfoStr2[0], minTime, maxtime, Promedio, mensaje]
+                let resultadosPrueba = [status, packetInfoStr2[0], minTime, maxtime, Promedio, mensaje]
 
-                res.render('pruebas', { mensaje: resultadosPrueba})
+                res.render('pruebas', { mensaje: resultadosPrueba })
             } else {
-                console.log(`${host}:3150 está fuera de línea`);
-                res.render('pruebas', { mensaje: 'sistema fuera de linea' })
+                console.log(`error al hacer ping a `);
+                let mensaje = 'El dominio: ' + host + ' no admite pings aunque este en linea ';
+                let resultadosPrueba = [status, mensaje]
+                res.render('pruebas', { mensaje: resultadosPrueba })
             }
         })
         .catch((error) => {
@@ -91,6 +98,48 @@ router.get('/checkStatus', sesionAdmin('admin pruebas'), manageSession('admin pr
         });
 
 })
+
+
+router.get('/checkStatusChat', sesionAdmin('admin pruebas'), manageSession('admin pruebas'), async (req, res) => {
+    let hostChat = 'https://chatwr2-production.up.railway.app/systemStatus'
+    let status = await verificarEstado(hostChat);
+
+    const host = 'chatwr2-production.up.railway.app';
+    let portChat = 3000;
+    ping.promise.probe(host, { port: portChat, timeout: 10 })
+
+        .then((result) => {
+            if (result.alive) {
+
+                let minTime = 'Tiempo mínimo:' + result.min;
+                let maxtime = 'Tiempo máximo:' + result.max;
+                let Promedio = 'Promedio de tiempo:' + result.avg;
+                let mensaje = `sistemas operando en ${host}:${portChat}`
+
+
+
+                //Obtener informacion de los paquetes que se enviaron para hacer el ping con result.otuput y dividir el string
+                let packetInfo = result.output;
+                let packetInfoStr1 = packetInfo.split('para 127.0.0.1:')
+                let packetInfoStr2 = packetInfoStr1[1].split('Tiempos aproximados')
+
+                //mandar todo como un array 
+                let resultadosPrueba = [status, packetInfoStr2[0], minTime, maxtime, Promedio, mensaje]
+
+                res.render('pruebas', { mensaje: resultadosPrueba })
+            } else {
+                console.log(`error al hacer ping a `);
+                let mensaje = 'El dominio: ' + host + ' no admite pings aunque este en linea ';
+                let resultadosPrueba = [status, mensaje]
+                res.render('pruebas', { mensaje: resultadosPrueba })
+            }
+        })
+        .catch((error) => {
+            console.error(`Error al hacer ping a ${host}:${portChat}`, error);
+        });
+
+})
+
 
 
 export default router;
