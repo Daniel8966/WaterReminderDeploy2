@@ -77,42 +77,6 @@ router.post('/delUsuario', sesionAdmin('admin pruebas'), manageSession('admin pr
 })
 
 
-
-router.get('/pruebas', sesionAdmin('admin pruebas'), manageSession('admin pruebas'), async (req, res) => {
-
-
-    res.render('pruebas', {mensaje: false})
-
-
-})
-
-
-
-router.get('/pingLocal', sesionAdmin('admin pruebas'), manageSession('admin pruebas'), async (req, res) => {
-    const host = 'localhost';
-
-    ping.promise.probe(host, { port: 3150, timeout: 10 })
-        .then((result) => {
-            if (result.alive) {
-                console.log(`${host}:3150 está en línea`);
-                res.render('pruebas', {mensaje : 'amogus'})
-            } else {
-                console.log(`${host}:3150 está fuera de línea`);
-                res.send('piog')
-            }
-        })
-        .catch((error) => {
-            console.error(`Error al hacer ping a ${host}:3150`, error);
-        });
-   
-
-})
-
-
-
-
-
-
 router.post('/updateUser', sesionAdmin('admin update User'), manageSession('admin update user'), async (req, res) => {
     const nombre = req.body.nombre;
     const email = req.body.correo;

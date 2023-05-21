@@ -99,6 +99,9 @@ app.use('/perfil/editarPerfil', rutasPerfil);
 import rutasAdmin from './router/RutasAdmin.js'
 app.use('/admin', rutasAdmin)
 
+import pruebasAdmin from './tests/PruebasSistema.js'
+app.use('/pruebas', pruebasAdmin)
+
 
 
 export default app;
