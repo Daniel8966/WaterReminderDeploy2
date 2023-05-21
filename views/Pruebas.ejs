@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>pruebita</title>
+    <title>Pruebas de Sistema</title>
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee&amp;display=swap">
@@ -68,9 +68,9 @@
                         height="370" class="card-img-top" alt="Imagen 1">
                     <div class="card-body">
                         <h5 class="card-title">Water Reminder main</h5>
-                        <p class="card-text">status del proyecto principal en linea</p>
+                        <p class="card-text">Estatus del proyecto principal en linea: mandar una peticion GET y un PING al proyecto principal </p>
                         <br>
-                        <a href="pruebas/checkStatus" class="btn btn-dark btn-full-width">Comprar</a>
+                        <a href="../pruebas/checkStatus" class="btn btn-dark btn-full-width">comprobar Conexión</a>
                     </div>
                 </div>
             </div>
@@ -81,7 +81,7 @@
                         <h5 class="card-title">Base de Datos WaterReminder</h5>
                         <p class="card-text">Estatus de conexion de la base de datos</p>
                         <br>
-                        <a href="#" class="btn btn-dark btn-full-width">Comprar</a>
+                        <a href="#" class="btn btn-dark btn-full-width">Probar Conexion</a>
                     </div>
                 </div>
             </div>
@@ -92,13 +92,30 @@
                         <h5 class="card-title">Chat de WaterReminder</h5>
                         <p class="card-text">Estatus del chat de WaterReminder</p>
                         <br>
-                        <a href="#" class="btn btn-dark btn-full-width">Comprar</a>
+                        <a href="#" class="btn btn-dark btn-full-width">Comporbar conexión</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <h2 style="font-size: 32px;color: #000000;font-weight: bold;margin-top: 1em;">Estatus:</h2>
+
+
+        <% if (mensaje){ 
+            for (i=0 ; i <=mensaje.length; i++ ){ %>
+
+            <h6 style="font-size: 32px;color: #000000;font-weight: bold;margin-top: 1em;">
+                <%=mensaje[i]%>
+            </h6>
+
+
+            <%} %>
+
+
+                <%} else{ %>
+
+
+                    <% }%>
+
     </div>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/bs-init.js"></script>
