@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router();
 import manageSession from '../middlewares/sesiones.js';
 import { connection } from '../database/DatabaseConexion.js'
-import { PORT } from '../configENV.js';
+import { PORT, DB_NAME } from '../configENV.js';
 import ping from 'ping'
 import axios from 'axios'
 
@@ -48,7 +48,7 @@ async function verificarEstado(host) {
     } catch (error) {
         console.error('Error al verificar el estado del proyecto', error);
         status = 'Error al verificar el estado del proyecto' + error
-        return  status;
+        return status;
 
     }
     return status;
@@ -57,7 +57,7 @@ async function verificarEstado(host) {
 
 
 
-router.get('/checkStatus', sesionAdmin('admin pruebas'), manageSession('admin pruebas'), async (req, res) => {
+router.get('/checkStatus', sesionAdmin('admin pruebas Status '), manageSession('admin pruebas'), async (req, res) => {
 
     //checar la ruta del system status
     let host1 = 'http://localhost:3150/pruebas/systemStatus'
@@ -87,11 +87,11 @@ router.get('/checkStatus', sesionAdmin('admin pruebas'), manageSession('admin pr
 
                 res.render('pruebas', { mensaje: resultadosPrueba })
             } else {
-               
-                let mensaje ;
-                if (status.includes('failed')){
-                    mensaje = `Error al hacer ping al dominio ${host}` 
-                }else{
+
+                let mensaje;
+                if (status.includes('failed')) {
+                    mensaje = `Error al hacer ping al dominio ${host}`
+                } else {
                     mensaje = 'El dominio: ' + host + ' no admite pings aunque este en linea ';
                 }
                 let resultadosPrueba = [status, mensaje]
@@ -105,7 +105,7 @@ router.get('/checkStatus', sesionAdmin('admin pruebas'), manageSession('admin pr
 })
 
 
-router.get('/checkStatusChat', sesionAdmin('admin pruebas'), manageSession('admin pruebas'), async (req, res) => {
+router.get('/checkStatusChat', sesionAdmin('admin pruebas Status chat'), manageSession('admin pruebas'), async (req, res) => {
     let hostChat = 'https://chatwr2-production.up.railway.app/systemStatus'
     let status = await verificarEstado(hostChat);
 
@@ -133,11 +133,11 @@ router.get('/checkStatusChat', sesionAdmin('admin pruebas'), manageSession('admi
 
                 res.render('pruebas', { mensaje: resultadosPrueba })
             } else {
-        
-                let mensaje ;
-                if (status.includes('failed')){
-                    mensaje = `Error al hacer ping al dominio ${host}` 
-                }else{
+
+                let mensaje;
+                if (status.includes('failed')) {
+                    mensaje = `Error al hacer ping al dominio ${host}`
+                } else {
                     mensaje = 'El dominio: ' + host + ' no admite pings aunque este en linea ';
                 }
                 let resultadosPrueba = [status, mensaje]
@@ -150,6 +150,20 @@ router.get('/checkStatusChat', sesionAdmin('admin pruebas'), manageSession('admi
 
 })
 
+router.get('/dbCheck', sesionAdmin('check base de datos'), manageSession('pruebas base de datos'), async (req, res) => {
 
+    connection.connect((err) => {
+        if (err) {
+            console.error('Error de conexión:', err);
+            let conexión = `Error de conexion a la base de datos: ${DB_NAME}`
+            let resultadosPrueba = [conexión]
+            res.render('pruebas', { mensaje: resultadosPrueba })
+        }
+        let conexión = `Conexión exitosa la base de datos: ${DB_NAME}`
+        let resultadosPrueba = [conexión]
+        res.render('pruebas', { mensaje: resultadosPrueba })
+        console.log('Conexión exitosa a la base de datos.');
+    });
+})
 
 export default router;
