@@ -47,8 +47,8 @@ async function verificarEstado(host) {
         }
     } catch (error) {
         console.error('Error al verificar el estado del proyecto', error);
-
-        return error;
+        status = 'Error al verificar el estado del proyecto' + error
+        return  status;
 
     }
     return status;
@@ -65,7 +65,7 @@ router.get('/checkStatus', sesionAdmin('admin pruebas'), manageSession('admin pr
 
     //hacer un ping al localhost
     const host = 'localhost';
-    ping.promise.probe(host, { port: PORT, timeout: 10 })
+    ping.promise.probe(host, { port: PORT, timeout: 5 })
 
         .then((result) => {
             if (result.alive) {
@@ -106,7 +106,7 @@ router.get('/checkStatusChat', sesionAdmin('admin pruebas'), manageSession('admi
 
     const host = 'chatwr2-production.up.railway.app';
     let portChat = 3000;
-    ping.promise.probe(host, { port: portChat, timeout: 10 })
+    ping.promise.probe(host, { port: portChat, timeout: 5 })
 
         .then((result) => {
             if (result.alive) {
@@ -129,7 +129,12 @@ router.get('/checkStatusChat', sesionAdmin('admin pruebas'), manageSession('admi
                 res.render('pruebas', { mensaje: resultadosPrueba })
             } else {
                 console.log(`error al hacer ping a `);
-                let mensaje = 'El dominio: ' + host + ' no admite pings aunque este en linea ';
+                let mensaje ;
+                if (status.includes('failed')){
+                    mensaje = `Error al hacer ping al dominio ${host}` 
+                }else{
+                    mensaje = 'El dominio: ' + host + ' no admite pings aunque este en linea ';
+                }
                 let resultadosPrueba = [status, mensaje]
                 res.render('pruebas', { mensaje: resultadosPrueba })
             }
