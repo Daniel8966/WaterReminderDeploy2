@@ -3,7 +3,8 @@ const router = express.Router();
 import manageSession from '../middlewares/sesiones.js';
 import { connection } from '../database/DatabaseConexion.js'
 import { PORT } from '../configENV.js';
-
+import ping from 'ping'
+import axios from 'axios'
 
 router.get('/', sesionAdmin('admin pruebas'), manageSession('admin pruebas'), async (req, res) => {
 
@@ -28,22 +29,30 @@ function sesionAdmin(nombre) {
     }
 }
 
-router.get('/systemSatus', sesionAdmin('admin pruebas'), manageSession('admin pruebas'), async (req, res) => {
+router.get('/systemStatus',  async (req, res) => {
     res.status(200).send('En línea');
 })
 
 
 async function verificarEstado() {
+    let status;
     try {
-        const response = await axios.get('http://localhost:3150/status');
+        const response = await axios.get('http://localhost:3150/pruebas/systemStatus');
         if (response.status === 200 && response.data === 'En línea') {
-            console.log('El proyecto está en línea');
+            console.log('El proyecto está en linea');
+            status = `El proyecto esta en linea`;
         } else {
-            console.log('El proyecto no está en línea');
+            console.log('El proyecto no esta en linea');
+            status = `El proyecto no esta en linea`;
         }
     } catch (error) {
         console.error('Error al verificar el estado del proyecto', error);
+    
+        return error;
+
     }
+    return status;
+
 }
 
 
@@ -65,9 +74,6 @@ router.get('/checkStatus', sesionAdmin('admin pruebas'), manageSession('admin pr
         .catch((error) => {
             console.error(`Error al hacer ping a ${host}:3150`, error);
         });
-
-
-
 
 })
 

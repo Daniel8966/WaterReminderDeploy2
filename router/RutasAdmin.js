@@ -71,9 +71,6 @@ router.post('/delUsuario', sesionAdmin('admin pruebas'), manageSession('admin pr
     })
 
 
-
-
-
 })
 
 
@@ -125,8 +122,6 @@ router.get('/perfilAdmin', sesionAdmin('perfil admin '), manageSession('perfil a
                 actFisica: respuesta[0].Actividad_fisica
             })
     })
-
-
 
 })
 
