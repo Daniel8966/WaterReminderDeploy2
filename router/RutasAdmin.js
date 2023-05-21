@@ -3,8 +3,7 @@ import express, { query } from 'express';
 const router = express.Router();
 import { connection } from '../database/DatabaseConexion.js'
 import manageSession from '../middlewares/sesiones.js';
-
-
+import ping from 'ping'
 
 function sesionAdmin(nombre) {
     return function (req, res, next) {
@@ -82,10 +81,35 @@ router.post('/delUsuario', sesionAdmin('admin pruebas'), manageSession('admin pr
 router.get('/pruebas', sesionAdmin('admin pruebas'), manageSession('admin pruebas'), async (req, res) => {
 
 
-    res.render('pruebas')
+    res.render('pruebas', {mensaje: false})
 
 
 })
+
+
+
+router.get('/pingLocal', sesionAdmin('admin pruebas'), manageSession('admin pruebas'), async (req, res) => {
+    const host = 'localhost';
+
+    ping.promise.probe(host, { port: 3150, timeout: 10 })
+        .then((result) => {
+            if (result.alive) {
+                console.log(`${host}:3150 está en línea`);
+                res.render('pruebas', {mensaje : 'amogus'})
+            } else {
+                console.log(`${host}:3150 está fuera de línea`);
+                res.send('piog')
+            }
+        })
+        .catch((error) => {
+            console.error(`Error al hacer ping a ${host}:3150`, error);
+        });
+   
+
+})
+
+
+
 
 
 
@@ -94,13 +118,13 @@ router.post('/updateUser', sesionAdmin('admin update User'), manageSession('admi
     const email = req.body.correo;
     const idUsuario = req.body.idUsuario
     console.log(idUsuario)
-    
+
     const query4 = `update usuario set Usuario=?, email = ? where idUsuario = ? `
-     connection.query(query4, [nombre, email, idUsuario], async (err, respuesta, fields) => {
-         if (err) return console.log("Error", err);
-         return res.redirect( 302, '/admin');
-     })
- 
+    connection.query(query4, [nombre, email, idUsuario], async (err, respuesta, fields) => {
+        if (err) return console.log("Error", err);
+        return res.redirect(302, '/admin');
+    })
+
 
 
 })
