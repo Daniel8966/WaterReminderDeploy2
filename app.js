@@ -94,7 +94,6 @@ app.use('/grupos', rutasGrupos);
 
 
 app.use('/perfil', rutasPerfil);
-app.use('/perfil/editarPerfil', rutasPerfil);
 
 import rutasAdmin from './router/RutasAdmin.js'
 app.use('/admin', rutasAdmin)
