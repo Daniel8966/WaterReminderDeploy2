@@ -9,7 +9,7 @@ router.get('/', manageSession('grupos lista'), (req, res, next) => {
     //Aqui el codigo de la ruta 
     console.log('Sesion existente - grupos')
     var idPersona = req.session.idPersona;
-    var query = String("select persona_has_cgrupos.CGrupos_idCGrupos as 'codigo1', CGrupos.idcGrupos as 'codigo2', persona_has_cgrupos.persona_idPersona as 'idPersona' , CGrupos.Nombre_Grupo as 'nombreGrupo' from persona_has_cgrupos Inner join CGrupos	on persona_has_cgrupos.CGrupos_idCGrupos = CGrupos.idCGrupos where persona_has_cgrupos.persona_idPersona = ?; ")
+    var query = String("select persona_has_cgrupos.cgrupos_idcgrupos as 'codigo1', cgrupos.idcgrupos as 'codigo2', persona_has_cgrupos.persona_idPersona as 'idPersona' , cgrupos.Nombre_Grupo as 'nombreGrupo' from persona_has_cgrupos Inner join cgrupos	on persona_has_cgrupos.cgrupos_idcgrupos = cgrupos.idcgrupos where persona_has_cgrupos.persona_idPersona = ?; ")
     connection.query(query, [idPersona], (error, respuesta) => {
         if (error) {
             console.log("errror al seleccionar" + error);
@@ -37,7 +37,7 @@ router.get('/grupo/:idGrupo', manageSession('grupo - participantes'), (req, res,
         "Usuario as 'nombre', " +
         "email as 'email', " +
         "meta_agua as 'meta_agua', " +
-        "CGrupos_idCGrupos as 'idGrupo', " +
+        "cgrupos_idcgrupos as 'idGrupo', " +
         "Nombre_Grupo as 'Nombre_Grupo' " +
 
         "from usuario u " +
@@ -45,8 +45,8 @@ router.get('/grupo/:idGrupo', manageSession('grupo - participantes'), (req, res,
         "on u.idUsuario = p.Usuario_idUsuario " +
         "inner join persona_has_cgrupos pg " +
         "on p.idPersona = pg.persona_idPersona " +
-        "inner join CGrupos g " +
-        "on pg.CGrupos_idCGrupos = g.idCGrupos where g.idCGrupos = ? ;")
+        "inner join cgrupos g " +
+        "on pg.cgrupos_idcgrupos = g.idcgrupos where g.idcgrupos = ? ;")
     try {
         connection.query(query, [idGrupo], (error, respuesta) => {
             if (error) {
@@ -91,19 +91,19 @@ router.post('/crearGrupo', manageSession('grupos - crear'), (req, res, next) => 
     var idCgrupo = null;
 
     //insertar en grupos
-    connection.query('INSERT INTO CGrupos SET ?', { idCgrupos: idCgrupo, Nombre_Grupo: nombreGrupo, estadoGrupo: 0, adminID: idPersona }, async (error, results) => {
+    connection.query('INSERT INTO cgrupos SET ?', { idcgrupos: idCgrupo, Nombre_Grupo: nombreGrupo, estadoGrupo: 0, adminID: idPersona }, async (error, results) => {
         if (error) {
             console.log(error);
         } else {
 
             //obtener el codigo generado
-            connection.query("SELECT LAST_INSERT_ID() as 'idCgrupos' ", (error, respuesta, field) => {
-                console.log("el identificador del grupo es : " + respuesta[0].idCgrupos)
-                var codigo = respuesta[0].idCgrupos;
+            connection.query("SELECT LAST_INSERT_ID() as 'idcgrupos' ", (error, respuesta, field) => {
+                console.log("el identificador del grupo es : " + respuesta[0].idcgrupos)
+                var codigo = respuesta[0].idcgrupos;
 
                 //relacionar la persona con el grupo en
 
-                connection.query('INSERT INTO persona_has_cgrupos SET ?', { Persona_Grupoid: null, persona_idPersona: idPersona, CGrupos_idCGrupos: codigo }, async (error, results) => {
+                connection.query('INSERT INTO persona_has_cgrupos SET ?', { Persona_Grupoid: null, persona_idPersona: idPersona, cgrupos_idcgrupos: codigo }, async (error, results) => {
                     if (error) {
                         console.log(error);
                     } else {
@@ -135,7 +135,7 @@ router.post('/unirseGrupo', manageSession('unirse a grupo'), (req, res, next) =>
     var idPersona = req.session.idPersona;
 
     //Validar q la persona no este en el grupo
-    connection.query('select  * from persona_has_cgrupos where CGrupos_idCGrupos = ' + codigo + '', (error, results) => {
+    connection.query('select  * from persona_has_cgrupos where cgrupos_idcgrupos = ' + codigo + '', (error, results) => {
         if (error) throw error;
         try {
             var integrante = results[0].persona_idPersona;
@@ -147,7 +147,7 @@ router.post('/unirseGrupo', manageSession('unirse a grupo'), (req, res, next) =>
             } else {
 
                 //Relacionar person y grupo
-                connection.query('INSERT INTO persona_has_cgrupos SET ?', { Persona_Grupoid: null, persona_idPersona: idPersona, CGrupos_idCGrupos: codigo }, async (error, results) => {
+                connection.query('INSERT INTO persona_has_cgrupos SET ?', { Persona_Grupoid: null, persona_idPersona: idPersona, cgrupos_idcgrupos: codigo }, async (error, results) => {
                     if (error) {
                         console.log(error);
                     } else {
@@ -174,7 +174,7 @@ router.post('/borrarGrupo', manageSession('borrar grupo'), (req, res, next) => {
     var idCgrupo = req.body.codigo;
     console.log('idGrupo:' + idCgrupo)
     //borrar en tabla relacional
-    connection.query('delete from persona_has_cgrupos where CGrupos_idCGrupos = ?;', [idCgrupo], async (error, results) => {
+    connection.query('delete from persona_has_cgrupos where cgrupos_idcgrupos = ?;', [idCgrupo], async (error, results) => {
         if (error) {
             console.log(error);
         } else {
@@ -183,7 +183,7 @@ router.post('/borrarGrupo', manageSession('borrar grupo'), (req, res, next) => {
     })
 
     //-borrar de grupos
-    connection.query('delete from CGrupos where idCGrupos = ?;', [idCgrupo], async (error, results) => {
+    connection.query('delete from cgrupos where idcgrupos = ?;', [idCgrupo], async (error, results) => {
         if (error) {
             console.log(error);
         } else {
@@ -203,7 +203,7 @@ router.post('/salirGrupo', manageSession('salir grupo'), (req, res, next) => {
 
     console.log('el id de la persona que se quiere salir es: ' + idPersona)
 
-    connection.query('delete from persona_has_cgrupos where CGrupos_idCGrupos = ? and persona_idPersona = ? ;', [idCgrupo, idPersona], async (error, results) => {
+    connection.query('delete from persona_has_cgrupos where cgrupos_idcgrupos = ? and persona_idPersona = ? ;', [idCgrupo, idPersona], async (error, results) => {
         if (error) {
             console.log(error);
         } else {
