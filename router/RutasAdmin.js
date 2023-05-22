@@ -26,7 +26,7 @@ router.get('/', sesionAdmin('admin usuarios'), manageSession('admin usuarios'), 
     connection.query(query, async (err, respuesta, fields) => {
         if (err) return console.log("Error", err);
 
-        res.render('administrador', { usuarios: respuesta })
+        res.render('Administrador', { usuarios: respuesta })
     })
 
 })
