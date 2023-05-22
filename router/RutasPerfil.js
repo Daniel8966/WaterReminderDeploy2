@@ -54,7 +54,7 @@ router.get('/editarPerfil', manageSession('editar perfil'), (req, res, next) => 
 
     const idUsuario = req.session.idUsuario;
 
-    const query = `select * from persona join usuario where   Usuario_idUsuario =  idUsuario and idUsuario = ?  ;`
+    const query = `select * from persona join usuario where  Usuario_idUsuario = idUsuario and idUsuario = ?  ;`
     connection.query(query, [idUsuario], (err, respuesta,) => {
         if (err) { throw err };
 
