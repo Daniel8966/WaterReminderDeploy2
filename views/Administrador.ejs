@@ -72,8 +72,10 @@
                                 </thead>
 
                                 <%  var i = 0;
-                                usuarios.forEach((user)=>{%>
-                                    i++;
+                                usuarios.forEach((user)=>{i++; 
+                                    
+                                    %>
+                                    
                                     <form action="admin/delUsuario" id="borrar-usuario" method="post">
                                         <input type="hidden" value="<%=user.idPersona%>" name="idPersona">
                                         <input type="hidden" value="<%=user.idUsuario%>" name="idUsuario">
