@@ -66,7 +66,7 @@ router.get('/editarPerfil', manageSession('editar perfil'), (req, res, next) => 
             sexo = 'mujer'
         }
 
-        res.render('../views/editar',
+        res.render('Editar',
             {
                 nombre: respuesta[0].Usuario,
                 sexo: sexo,
