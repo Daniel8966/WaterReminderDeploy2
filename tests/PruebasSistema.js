@@ -40,7 +40,7 @@ async function verificarEstado(host) {
         const response = await axios.get(host);
         if (response.status === 200 && response.data === 'En línea') {
             console.log('El proyecto está en linea');
-            return status = `El proyecto esta en linea`;
+            return status = `El proyecto: ${host} esta en linea`;
         } else {
             console.log('El proyecto no esta en linea');
             return status = `El proyecto no esta en linea`;
