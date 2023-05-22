@@ -3,7 +3,7 @@ import express, { query } from 'express';
 import { comparar } from '../database/encriptar.js';
 import { connection } from '../database/DatabaseConexion.js'
 
-import manageSession   from '../middlewares/sesiones.js';
+import manageSession from '../middlewares/sesiones.js';
 
 
 const router = express.Router();
@@ -132,8 +132,12 @@ router.post('/actualizarPerfil', manageSession('actualizar datos perfil'), async
 
                     } else {
 
+                        if (req.session.admin) { res.redirect('/admin/perfilAdmin') } else {
+                            res.redirect('/perfil')
+                        }
+
                         console.log('tabla usuario actualizada con exito')
-                        res.redirect('/perfil')
+
 
                     }
 

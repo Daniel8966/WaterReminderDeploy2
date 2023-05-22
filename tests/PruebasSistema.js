@@ -9,7 +9,7 @@ import axios from 'axios'
 router.get('/', sesionAdmin('admin pruebas'), manageSession('admin pruebas'), async (req, res) => {
 
 
-    res.render('pruebas', { mensaje: false })
+    res.render('Pruebas', { mensaje: false })
 
 
 })
@@ -60,11 +60,11 @@ async function verificarEstado(host) {
 router.get('/checkStatus', sesionAdmin('admin pruebas Status '), manageSession('admin pruebas'), async (req, res) => {
 
     //checar la ruta del system status
-    let host1 = 'http://localhost:3150/pruebas/systemStatus'
+    let host1 = `https://waterreminderdeploy2-production.up.railway.app/pruebas/systemStatus`
     let status = await verificarEstado(host1);
 
     //hacer un ping al localhost
-    const host = 'localhost';
+    const host = 'waterreminderdeploy2-production.up.railway.app';
     ping.promise.probe(host, { port: PORT, timeout: 5 })
 
         .then((result) => {
