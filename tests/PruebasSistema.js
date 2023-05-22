@@ -100,9 +100,9 @@ router.get('/checkStatus', sesionAdmin('admin Pruebas Status '), manageSession('
         })
         .catch((error) => {
             console.error(`Error al hacer ping a ${host}:3150`, error);
-            mensaje = 'El dominio: ' + host + ' no admite pings aunque este en linea ';
-            let resultadosPrueba = [status , mensaje]
+            let resultadosPrueba = [status]
             res.render('Pruebas', { mensaje: resultadosPrueba })
+
 
         });
 
@@ -150,8 +150,7 @@ router.get('/checkStatusChat', sesionAdmin('admin Pruebas Status chat'), manageS
         })
         .catch((error) => {
             console.error(`Error al hacer ping a ${host}:3150`, error);
-            mensaje = 'El dominio: ' + host + ' no admite pings aunque este en linea ';
-            let resultadosPrueba = [status , mensaje]
+            let resultadosPrueba = [status]
             res.render('Pruebas', { mensaje: resultadosPrueba })
 
         });
