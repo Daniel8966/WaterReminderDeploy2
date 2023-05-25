@@ -96,6 +96,7 @@
                                                 <th class="text-center" style="background: #1188e8;"></th>
                                                 <th class="text-center" style="background: #0ea0ff;">Consumo de agua
                                                 </th>
+                                                <th class="text-center" style="background: #0ea0ff;">Azucar                                                 </th>
                                                 <th class="text-center" style="background: #0ea0ff;">Fecha</th>
                                                 <th class="text-center filter-false sorter-false"
                                                     style="background: #0ea0ff;">Acciones</th>
@@ -108,7 +109,10 @@
                                                         <td><i class="fas fa-glass-whiskey btnNoBorders"
                                                                 style="color: #1188e8;font-size: 28px;"></i></td>
                                                         <td>
-                                                            <%= user.Consumo_Total %>
+                                                            <%= user.Consumo_Total %> mL
+                                                        </td>
+                                                        <td>
+                                                            <%= user.azucar %> gramos 
                                                         </td>
                                                         <td>
                                                             <%= user.Fecha %>

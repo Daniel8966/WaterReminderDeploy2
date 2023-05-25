@@ -41,4 +41,4 @@ function generarRegistros(idPersona) {
 
 }
 
-console.log(generarRegistros('23'))
+console.log(generarRegistros('4'))

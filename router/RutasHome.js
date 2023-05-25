@@ -28,7 +28,7 @@ router.get('/', manageSession('home'), (req, res, next) => {
 
 
     console.log('Sesion creada y existente-HOME')
-    connection.query('SELECT * FROM consumo_agua WHERE Persona_idPersona="' + req.session.idPersona + '"', (error, results) => {
+    connection.query('SELECT * FROM consumo_agua WHERE Persona_idPersona=? ', [req.session.idPersona],   (error, results) => {
         if (error) throw error;
 
         function calcularMeta(peso, altura, actividad) {
@@ -58,8 +58,8 @@ router.post('/addWater', manageSession('consumo de agua'), (req, res, next) => {
     const anio = fechaHora.getFullYear()
     const mes = (parseInt(fechaHora.getMonth()) + 1)
     const dia = (parseInt(fechaHora.getDate()));
-
-    connection.query(`INSERT INTO consumo_agua (Consumo_Total,Fecha,Persona_idPersona,datos_bebida_idRegistro_bebida,datos_bebida_CTipo_bebida_idCTipo_bebida) VALUES (${parseInt(cantidad)},'${anio}-${mes}-${dia}',${req.session.idPersona},1,1)`, (err, respuesta, fields) => {
+    const azucar = 0;
+    connection.query(`INSERT INTO consumo_agua VALUES (null ,${parseInt(cantidad)}, ${azucar} ,'${anio}-${mes}-${dia}',${req.session.idPersona},1,1)`, (err, respuesta, fields) => {
         if (err) return console.log("Error", err)
 
     })
