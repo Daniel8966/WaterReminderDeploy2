@@ -54,7 +54,7 @@ router.get('/', manageSession('grafica- semanal'), (req, res, next) => {
 
 
 
-    let query0 = `SELECT todas_las_fechas.Fecha, COALESCE(SUM(consumo_agua.Consumo_Total), 0) as suma_consumo
+    let query0 = `    SELECT todas_las_fechas.Fecha, COALESCE(SUM(consumo_agua.Consumo_Total), 0) AS suma_consumo, COALESCE(SUM(consumo_agua.azucar), 0) AS suma_azucar
         FROM (
             SELECT ? as Fecha UNION ALL
             SELECT ? as Fecha UNION ALL
@@ -101,8 +101,13 @@ router.get('/', manageSession('grafica- semanal'), (req, res, next) => {
             numeros[`numero${i + 1}`] = results0[i].suma_consumo;
         }
 
+        const numeros2 = {};
+        for (let i = 0; i < results0.length; i++) {
+            numeros2[`numero${i + 1}`] = results0[i].suma_azucar;
+        }
         const [numero1, numero2, numero3, numero4, numero5, numero6, numero7] = results0.map(({ suma_consumo }) => suma_consumo);
 
+        const [azucar1, azucar2, azucar3, azucar4, azucar5, azucar6, azucar7] = results0.map(({ suma_azucar }) => suma_azucar);
         res.render('graficaSeamana', {
             numero1,
             numero2,
@@ -111,6 +116,8 @@ router.get('/', manageSession('grafica- semanal'), (req, res, next) => {
             numero5,
             numero6,
             numero7,
+            azucar1, azucar2, azucar3, azucar4, azucar5, azucar6, azucar7,
+
             promedio: Math.trunc(promedio),
             meta: req.session.meta
         });

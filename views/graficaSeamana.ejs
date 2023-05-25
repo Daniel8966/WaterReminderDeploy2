@@ -31,16 +31,19 @@
 </head>
 
 <body onload="showResults1()">
-    <nav class="navbar navbar-dark navbar-expand-lg fixed-top portfolio-navbar gradient" style="background: linear-gradient(120deg, #125de0, #0effff);height: 6rem;width: 100%;">
-        <div class="container"><a class="navbar-brand logo" href="#">WR</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarNav"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top portfolio-navbar gradient"
+        style="background: linear-gradient(120deg, #125de0, #0effff);height: 6rem;width: 100%;">
+        <div class="container"><a class="navbar-brand logo" href="#">WR</a><button data-bs-toggle="collapse"
+                class="navbar-toggler" data-bs-target="#navbarNav"><span class="visually-hidden">Toggle
+                    navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav ms-auto">
-                <li class="nav-item item"><a class="nav-link active" href="/home">Home</a></li>
-                <li class="nav-item item"><a class="nav-link" href="/regAgua">Registro</a></li>
-                <li class="nav-item item"><a class="nav-link" href="/refrescos">Otras Bebidas</a></li>
-                <li class="nav-item item"><a class="nav-link" href="/grupos">Grupos</a></li>
-                <li class="nav-item item"><a class="nav-link" href="/perfil">Perfil</a></li>
-            </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item item"><a class="nav-link active" href="/home">Home</a></li>
+                    <li class="nav-item item"><a class="nav-link" href="/regAgua">Registro</a></li>
+                    <li class="nav-item item"><a class="nav-link" href="/refrescos">Otras Bebidas</a></li>
+                    <li class="nav-item item"><a class="nav-link" href="/grupos">Grupos</a></li>
+                    <li class="nav-item item"><a class="nav-link" href="/perfil">Perfil</a></li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -69,12 +72,22 @@
                                                     // Datos de la gráfica
 
                                                     const data = {
-                                                        labels: ['7 Días','6 Días', '5 Días', '4 Días', '3 Días', 'ayer', 'hoy'],
+                                                        labels: ['7 Días', '6 Días', '5 Días', '4 Días', '3 Días', 'ayer', 'hoy'],
                                                         datasets: [
+
+                                                            {
+                                                                label: 'Consumo de azucar',
+                                                                backgroundColor: 'rgba(187, 53, 0, 0.8)',
+                                                                borderColor: 'rgba(151, 43, 1, 0.8)',
+                                                                fill: false,
+                                                                borderWidth: 1,
+                                                                data: ['<%=azucar1%>', '<%=azucar2%>', '<%=azucar3%>', '<%=azucar4%>', '<%=azucar5%>', '<%=azucar6%>', '<%=azucar7%>'],
+                                                            },
                                                             {
                                                                 label: 'Consumo de la semana',
                                                                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                                                                 borderColor: 'rgba(54, 162, 235, 1)',
+                                                                fill: false,
                                                                 borderWidth: 1,
                                                                 data: ['<%=numero1%>', '<%=numero2%>', '<%=numero3%>', '<%=numero4%>', '<%=numero5%>', '<%=numero6%>', '<%=numero7%>'],
                                                             }, {
@@ -120,15 +133,15 @@
                                             </div>
                                             <ul class="fa-ul"></ul>
                                             <a href="/regAgua"><button
-                                                class="btn btn-outline-primary text-capitalize d-block text-uppercase w-100"
-                                                type="button"
-                                                style="max-width: 200px;font-size: 15px;margin-top: -2%;margin-left: 17%;">Semanal</button></a>
+                                                    class="btn btn-outline-primary text-capitalize d-block text-uppercase w-100"
+                                                    type="button"
+                                                    style="max-width: 200px;font-size: 15px;margin-top: -2%;margin-left: 17%;">Semanal</button></a>
 
-                                                
+
                                             <a href="/regAgua/regAguaMes"><button
-                                                class="btn btn-outline-primary text-capitalize d-block text-uppercase w-100"
-                                                type="button"
-                                                style="max-width: 200px;margin-top: -9%;margin-left: 55%;/*max-height: 5%;*/font-size: 15px;">Mensual</button></a>
+                                                    class="btn btn-outline-primary text-capitalize d-block text-uppercase w-100"
+                                                    type="button"
+                                                    style="max-width: 200px;margin-top: -9%;margin-left: 55%;/*max-height: 5%;*/font-size: 15px;">Mensual</button></a>
                                         </div>
                                     </div>
                                 </div>
