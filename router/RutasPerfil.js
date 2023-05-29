@@ -30,8 +30,8 @@ router.get('/', manageSession('Perfil'), (req, res, next) => {
 
         res.render('../views/perfil',
             {
-                
-                imgPerfilSexo : respuesta[0].Sexo_idsexo,
+
+                imgPerfilSexo: respuesta[0].Sexo_idsexo,
                 nombre: respuesta[0].Usuario,
                 sexo: sexo,
                 email: respuesta[0].email,
@@ -69,8 +69,8 @@ router.get('/editarPerfil', manageSession('editar perfil'), (req, res, next) => 
         }
 
         res.render('Editar',
-            {   
-                imgPerfilSexo : respuesta[0].Sexo_idsexo,
+            {
+                imgPerfilSexo: respuesta[0].Sexo_idsexo,
                 nombre: respuesta[0].Usuario,
                 sexo: sexo,
                 email: respuesta[0].email,
@@ -87,7 +87,7 @@ router.get('/editarPerfil', manageSession('editar perfil'), (req, res, next) => 
 });
 
 router.post('/actualizarPerfil', manageSession('actualizar datos perfil'), async (req, res, next) => {
-    //en esta ruta haremos que el usaurio actualize sus datos en la base de datos 
+    //en esta ruta haremos que el usaurio actualize sus datos en la base de datos
 
     const idUsuario = req.session.idUsuario
     const nombre = req.body.name;
@@ -96,11 +96,22 @@ router.post('/actualizarPerfil', manageSession('actualizar datos perfil'), async
     const peso = parseInt(req.body.peso);
     const altura = req.body.altura;
     const edad = req.body.edad;
-    const meta_agua = req.session.meta
     const hora_desp = req.body.despertar;
     const hora_dormir = req.body.dormir;
 
     const Actividad_fisica = req.body.actFisica;
+
+    //Calcular la nueva meta de agua con base a los nuevos parametros
+    function calcularMeta(peso, altura, actividad) {
+        const consumoIdeal = 66 + (13.7 * parseFloat(peso)) + (5 * parseFloat(altura)) - (6.5 * 20)
+
+        console.log(`Debes tomar ${consumoIdeal}`)
+        return consumoIdeal
+
+    }
+
+    const meta_agua = calcularMeta(peso, altura, Actividad_fisica);
+    Math.trunc(meta_agua);
 
     const query0 = `select password from usuario where idUsuario = ?   `;
     console.log('el usuario es: ' + idUsuario)
@@ -134,13 +145,10 @@ router.post('/actualizarPerfil', manageSession('actualizar datos perfil'), async
                         throw err;
 
                     } else {
-
-                        if (req.session.admin) { res.redirect('/admin/perfilAdmin') } else {
-                            res.redirect('/perfil')
-                        }
+                        req.session.meta = meta_agua;
 
                         console.log('tabla usuario actualizada con exito')
-
+                        res.redirect('/perfil')
 
                     }
 
@@ -172,11 +180,23 @@ router.post('/actualizarPassword', manageSession('actualizar password'), async (
     const peso = parseInt(req.body.peso);
     const altura = req.body.altura;
     const edad = req.body.edad;
-    const meta_agua = req.session.meta
     const hora_desp = req.body.despertar;
     const hora_dormir = req.body.dormir;
 
     const Actividad_fisica = req.body.actFisica;
+
+    //Calcular la nueva meta de agua con base a los nuevos parametros
+    function calcularMeta(peso, altura, actividad) {
+        const consumoIdeal = 66 + (13.7 * parseFloat(peso)) + (5 * parseFloat(altura)) - (6.5 * 20)
+
+        console.log(`Debes tomar ${consumoIdeal}`)
+        return consumoIdeal
+
+    }
+
+    const meta_agua = calcularMeta(peso, altura, Actividad_fisica);
+
+    console.log('la meta actualmente es : ' + meta_agua);
 
     const query0 = `select password from usuario where idUsuario = ?   `;
     console.log('el usuario es: ' + idUsuario)
@@ -210,6 +230,7 @@ router.post('/actualizarPassword', manageSession('actualizar password'), async (
                         throw err;
 
                     } else {
+                        req.session.meta = meta_agua;
 
                         console.log('tabla usuario actualizada con exito')
                         res.redirect('/perfil')

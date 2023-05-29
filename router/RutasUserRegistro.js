@@ -14,14 +14,23 @@ router.post('/', async (req, res, next) => {
     const peso = parseInt(req.body.peso);
     const altura = req.body.altura;
     const edad = req.body.edad;
-    const meta_agua = '2300';
     const hora_desp = req.body.despertar;
     const hora_dormir = req.body.dormir;
     const Actividad_fisica = req.body.actFisica;
     var sexo = req.body.sexo;
-
-
     const privilegio = 1;
+    
+    //Calcular la nueva meta de agua con base a los nuevos parametros
+    function calcularMeta(peso, altura, actividad) {
+        const consumoIdeal = 66 + (13.7 * parseFloat(peso)) + (5 * parseFloat(altura)) - (6.5 * 20)
+
+        console.log(`Debes tomar ${consumoIdeal}`)
+        return consumoIdeal
+
+    }
+
+    const meta_agua = calcularMeta(peso, altura, Actividad_fisica);
+    Math.trunc(meta_agua);
 
     if (sexo == 'Hombre') {
         sexo = 1;
@@ -66,7 +75,19 @@ router.post('/', async (req, res, next) => {
                         idUsuario = results[0].idUsuario;
                         console.log('el id recuperado' + results[0].idUsuario)
 
-                        connection.query('INSERT INTO persona SET ?', { peso: peso, altura: altura, edad: edad, meta_agua: meta_agua, hora_desp: hora_desp, hora_dormir: hora_dormir, Actividad_fisica: parseInt(Actividad_fisica), Sexo_idsexo: parseInt(sexo), Privilegio_idPrivilegio: parseInt(privilegio), Usuario_idUsuario: idUsuario }, async (error, results) => {
+
+                        connection.query('INSERT INTO persona SET ?', {
+                            peso: peso,
+                            altura: altura,
+                            edad: edad,
+                            meta_agua: meta_agua,
+                            hora_desp: hora_desp,
+                            hora_dormir: hora_dormir,
+                            Actividad_fisica: parseInt(Actividad_fisica),
+                            Sexo_idsexo: parseInt(sexo),
+                            Privilegio_idPrivilegio: parseInt(privilegio),
+                            Usuario_idUsuario: idUsuario
+                        }, async (error, results) => {
                             if (error) {
                                 console.log(error);
                             } else {
