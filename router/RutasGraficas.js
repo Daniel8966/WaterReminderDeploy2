@@ -146,7 +146,7 @@ router.get('/regAguaMes', manageSession('grafica - mensual'), (req, res, next) =
     const idPersona = req.session.idPersona;
     const meta_agua = req.session.meta;
 
-    let sum0, sum1, sum2, azucar0, azucar1, azucar2, promedio, frecuencia = 0;
+    let sum0, sum1, sum2, azucar0, azucar1, azucar2, promedio, diferencia = 0;
 
     var query0 = `SELECT SUM(Consumo_Total) as sumita ,  SUM(azucar) as azucarSuma FROM consumo_agua WHERE MONTH(Fecha) = (${mes}) and Persona_idPersona = ${idPersona}`
     connection.query(query0, (error, results) => {
@@ -203,13 +203,13 @@ router.get('/regAguaMes', manageSession('grafica - mensual'), (req, res, next) =
                 promedio = parseInt(promedioMes(sums))
                 req.session.promedioMes = promedio
 
-                frecuencia = meta_agua - promedio
+                diferencia = meta_agua - promedio
                 res.render('graficaMes', {
                     sum0, sum1, sum2, azucar0, azucar1, azucar2,
                     meta: meta_agua,
                     promedioMes: promedio,
                     promedioSemanal: req.session.promedioSemanal,
-                    frecuencia: frecuencia
+                    diferencia: diferencia
                 })
             })
 
