@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Pruebas</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alex+Brush&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Beau+Rivage&amp;display=swap">
+    <link rel="stylesheet" href="/assets/css/FontAwesome.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="/assets/css/Bold-BS4-Responsive-Pricing-Table-Snippet.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/css/theme.bootstrap_4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+    <link rel="stylesheet" href="/assets/css/Ludens---1-Dark-mode-Index-Table-with-Search-Filters.css">
+    <link rel="stylesheet" href="/assets/css/Ludens---1-Index-Table-with-Search--Sort-Filters-v20.css">
+    <link rel="stylesheet" href="/assets/css/Profile-with-data-and-skills.css">
+    <link rel="stylesheet" href="/assets/css/Projects-Grid-Horizontal-images.css">
+    <link rel="stylesheet" href="/assets/css/Simple-Bootstrap-Chat-1.css">
+    <link rel="stylesheet" href="/assets/css/Simple-Bootstrap-Chat.css">
+    <link rel="stylesheet" href="/assets/css/Team-icons.css">
+    <link rel="stylesheet" href="/assets/css/untitled.css">
+    
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/User-Rating-F19690.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top portfolio-navbar gradient"
+        style="height: 6rem;width: 100%;background: rgb(2,0,36);background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgb(0,133,255) 100%);">
+        <div class="container"><a class="navbar-brand logo" href="#">WR</a><button data-bs-toggle="collapse"
+                class="navbar-toggler" data-bs-target="#navbarNav"><span class="visually-hidden">Toggle
+                    navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item item"><a class="nav-link active" href="/admin">Administrar</a></li>
+                    <li class="nav-item item"><a class="nav-link" href="/pruebas">Pruebas</a></li>
+                    <li class="nav-item item"><a class="nav-link" href="/admin/perfilAdmin">Perfil</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page cv-page" style="height: 100vh;">
+    <div class="alco">  <center> <h1>Mesa de Pruebas</h1></center></div>
+       
+        <div class="container mt-5" style="margin-top: 20rem;">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <img src="/assets/img/Captura_de_pantalla_2023-03-15_234334-removebg-preview.png" class="card-img-top" alt="Imagen 1">
+                        <div class="card-bodey">
+                            <h5 class="card-title">Water Reminder main</h5>
+                            <p class="card-text">Estatus del proyecto principal en linea: mandar una peticion GET y un PING al proyecto principal </p>
+                            <br>
+                            <a href="../pruebas/checkStatus" class="btn btn-dark btn-full-width">comprobar Conexión</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <img src="/assets/img/bdimage.png" class="card-img-top" alt="Imagen 2">
+                        <div class="card-bodey">
+                            <h5 class="card-title">Base de Datos WaterReminder</h5>
+                            <p class="card-text">Estatus de conexión de la base de datos</p>
+                            <br>
+                            <a href="../pruebas/dbCheck" class="btn btn-dark btn-full-width">Probar Conexion</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <img src="/assets/img/ChatImage.png" class="card-img-top" alt="Imagen 2">
+                        <div class="card-bodey">
+                            <h5 class="card-title">Chat de WaterReminder</h5>
+                            <p class="card-text">Estatus del chat de WaterReminder</p>
+                            <br>
+                            <a href="../pruebas/checkStatusChat" class="btn btn-dark btn-full-width">Comprobar conexión</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+    
+    
+            <% if (mensaje){ 
+                for (i=0 ; i <=mensaje.length; i++ ){ %>
+    
+                <h6 style="font-size: 32px;color: #000000;font-weight: bold;margin-top: 1em;">
+                    <%=mensaje[i]%>
+                </h6>
+    
+    
+                <%} %>
+    
+    
+                    <%} else{ %>
+    
+    
+                        <% }%>
+    
+        </div>
+    </main>
+   
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/bs-init.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+    <script src="/assets/js/Ludens---1-Dark-mode-Index-Table-with-Search-Filters.js"></script>
+    <script src="/assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-1.js"></script>
+    <script src="/assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20.js"></script>
+    <script src="/assets/js/theme.js"></script>
+</body>
+
+</html>

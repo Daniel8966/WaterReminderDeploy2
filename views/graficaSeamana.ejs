@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Graficas semanales</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alex+Brush&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Beau+Rivage&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/FontAwesome.css">
+    <link rel="stylesheet" href="assets/css/Bold-BS4-Responsive-Pricing-Table-Snippet.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/css/theme.bootstrap_4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+    <link rel="stylesheet" href="assets/css/Ludens---1-Index-Table-with-Search--Sort-Filters-v20.css">
+    <link rel="stylesheet" href="assets/css/Profile-with-data-and-skills.css">
+    <link rel="stylesheet" href="assets/css/Projects-Grid-Horizontal-images.css">
+    <link rel="stylesheet" href="assets/css/Simple-Bootstrap-Chat-1.css">
+    <link rel="stylesheet" href="assets/css/Simple-Bootstrap-Chat.css">
+    <link rel="stylesheet" href="assets/css/Team-icons.css">
+    <link rel="stylesheet" href="assets/css/untitled.css">
+    <link rel="stylesheet" href="assets/css/User-Rating-F19690.css">
+
+    |
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body onload="showResults1()">
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top portfolio-navbar gradient"
+        style="background: linear-gradient(120deg, #125de0, #0effff);height: 6rem;width: 100%;">
+        <div class="container"><a class="navbar-brand logo" href="#">WR</a><button data-bs-toggle="collapse"
+                class="navbar-toggler" data-bs-target="#navbarNav"><span class="visually-hidden">Toggle
+                    navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item item"><a class="nav-link active" href="/home">Home</a></li>
+                    <li class="nav-item item"><a class="nav-link" href="/regAgua">Registro</a></li>
+                    <li class="nav-item item"><a class="nav-link" href="/refrescos">Otras Bebidas</a></li>
+                    <li class="nav-item item"><a class="nav-link" href="/grupos">Grupos</a></li>
+                    <li class="nav-item item"><a class="nav-link" href="/perfil">Perfil</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="portfolio-block website">
+        <div class="container">
+            <div class="row align-items-center" style="/*margin-top: 1%;*/margin-left: -5%;">
+                <div class="col-md-12 col-lg-5 offset-lg-1 text" style="width: 700px;margin-left: 2%;">
+                    <section class="pricing py-5" style="background: #ffffff;">
+                        <h6 class="card-price text-center"
+                            style="font-size: 38px;color: rgb(15,200,244);font-weight: bold;margin-top: -4%;">Registro
+                        </h6>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-4 col-xxl-11">
+                                    <div class="card mb-5 mb-lg-0"
+                                        style="width: 700px;margin-top: 25px;height: 500px;border-radius: 16px;border: 2px solid rgb(97,204,255);border-right-style: solid;border-right-color: rgb(15,205,245);border-bottom-style: solid;">
+                                        <div class="card-body"
+                                            style="/*height: auto;*//*border-color: var(--bs-warning);*/">
+                                            <div
+                                                style="height: 400px;width: 600px;margin-left: 5%;border-radius: 16px;border: 2px none rgb(97,204,255) ;">
+
+                                                <canvas id="myChart"></canvas>
+                                                <script>
+
+
+                                                    // Datos de la gráfica
+
+                                                    const data = {
+                                                        labels: ['7 Días', '6 Días', '5 Días', '4 Días', '3 Días', 'ayer', 'hoy'],
+                                                        datasets: [
+
+                                                            {
+                                                                label: 'Consumo de azucar',
+                                                                backgroundColor: 'rgba(187, 53, 0, 0.8)',
+                                                                borderColor: 'rgba(151, 43, 1, 0.8)',
+                                                                fill: false,
+                                                                borderWidth: 1,
+                                                                data: ['<%=azucar1%>', '<%=azucar2%>', '<%=azucar3%>', '<%=azucar4%>', '<%=azucar5%>', '<%=azucar6%>', '<%=azucar7%>'],
+                                                            },
+                                                            {
+                                                                label: 'Consumo de la semana',
+                                                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                                                borderColor: 'rgba(54, 162, 235, 1)',
+                                                                fill: false,
+                                                                borderWidth: 1,
+                                                                data: ['<%=numero1%>', '<%=numero2%>', '<%=numero3%>', '<%=numero4%>', '<%=numero5%>', '<%=numero6%>', '<%=numero7%>'],
+                                                            }, {
+                                                                label: "meta de agua",
+                                                                type: "line",
+                                                                data: new Array(7).fill('<%=meta%>'),
+                                                                borderColor: "rgb(255, 87, 5)",
+                                                                fill: false
+                                                            }
+                                                        ],
+                                                    };
+
+                                                    // Configuración de la gráfica
+
+
+
+                                                    const config = {
+                                                        type: 'bar',
+                                                        data: data,
+                                                        options: {
+                                                            scales: {
+                                                                yAxes: [{
+                                                                    ticks: {
+                                                                        beginAtZero: true
+                                                                    }
+                                                                }]
+                                                            }
+
+
+                                                        }
+                                                    }
+                                                        ;
+
+
+
+                                                    // Creación de la gráfica
+                                                    const myChart = new Chart(
+                                                        document.getElementById('myChart'),
+                                                        config
+                                                    );
+                                                </script>
+
+                                            </div>
+                                            <ul class="fa-ul"></ul>
+                                            <a href="/regAgua"><button
+                                                    class="btn btn-outline-primary text-capitalize d-block text-uppercase w-100"
+                                                    type="button"
+                                                    style="max-width: 200px;font-size: 15px;margin-top: -2%;margin-left: 17%;">Semanal</button></a>
+
+
+                                            <a href="/regAgua/regAguaMes"><button
+                                                    class="btn btn-outline-primary text-capitalize d-block text-uppercase w-100"
+                                                    type="button"
+                                                    style="max-width: 200px;margin-top: -9%;margin-left: 55%;/*max-height: 5%;*/font-size: 15px;">Mensual</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-12 col-lg-5 col-xxl-4" style="width: 460px;height: 600px;/*margin-top: 15%;*/">
+                    <div class="portfolio-laptop-mockup" style="width: 500px;height: 300px;"><img
+                            src="assets/img/registro.png" width="396" height="324"
+                            style="margin-top: 15%;margin-left: 8%;"></div>
+                    <div class="card"
+                        style="margin-left: 16%;width: 400px;margin-top: 15%;border-style: solid;border-color: rgb(204,238,254);">
+                        <div class="card-header"
+                            style="background: rgb(204,238,254);border-bottom-style: solid;border-bottom-color: rgb(204,238,254);">
+                            <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                                <li class="nav-item"><a class="nav-link active" id="item-1-1-tab" role="tab"
+                                        aria-controls="item-1-1" aria-selected="true" href="#item-1-1"
+                                        data-bs-toggle="tab">Prom S</a></li>
+                                <li class="nav-item"><a class="nav-link" id="item-1-2-tab" role="tab"
+                                        aria-controls="item-1-2" aria-selected="false" href="#item-1-2"
+                                        data-bs-toggle="tab" style="color: rgb(15,200,244);font-weight: bold;">Prom
+                                        M</a></li>
+                                <li class="nav-item"><a class="nav-link" id="item-1-3-tab" role="tab"
+                                        aria-controls="item-1-3" aria-selected="false" href="#item-1-3"
+                                        data-bs-toggle="tab" style="font-weight: bold;color: rgb(15,200,244);">Prom
+                                        F</a></li>
+                                <li class="nav-item"><a class="nav-link" id="item-1-3-tab-1" role="tab"
+                                        aria-controls="item-1-3" aria-selected="false" href="#item-1-3"
+                                        data-bs-toggle="tab" style="color: rgb(15,200,244);font-weight: bold;">Frec
+                                        B</a></li>
+                            </ul>
+                        </div>
+                        <div class="card-body" style="border: 2px solid rgb(204,238,254) ;">
+                            <div id="nav-tabContent" class="tab-content">
+                                <div id="item-1-1" class="tab-pane fade show active" role="tabpanel"
+                                    aria-labelledby="item-1-1-tab">
+                                    <h4>Promedio Semanal</h4>
+                                    <p>Usted a tomado <%=promedio%> ml por dia en promedio</p>
+                                </div>
+                                <div id="item-1-2" class="tab-pane fade" role="tabpanel" aria-labelledby="item-1-2-tab">
+                                    <h4>Second Item Title</h4>
+                                    <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus
+                                        ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
+                                        metus.</p><button class="btn btn-primary" type="button">Button</button>
+                                </div>
+                                <div id="item-1-3" class="tab-pane fade" role="tabpanel" aria-labelledby="item-1-3-tab">
+                                    <h4>Third Item Title</h4>
+                                    <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus
+                                        ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
+                                        metus.</p><button class="btn btn-primary" type="button">Button</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+    <script src="assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-1.js"></script>
+    <script src="assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>
