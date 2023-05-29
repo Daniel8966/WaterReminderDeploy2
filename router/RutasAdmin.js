@@ -22,7 +22,7 @@ function sesionAdmin(nombre) {
 //------RUTAS DE LAS PAGINAS------
 router.get('/', sesionAdmin('admin usuarios'), manageSession('admin usuarios'), async (req, res) => {
 
-    const query = `SELECT  idUsuario, idPersona, Usuario,  email FROM persona INNER JOIN usuario ON persona.Usuario_idUsuario=usuario.idUsuario where persona.Privilegio_idPrivilegio = 1; `
+    const query = `SELECT  idUsuario, idPersona, Usuario, meta_agua,  email FROM persona INNER JOIN usuario ON persona.Usuario_idUsuario=usuario.idUsuario where persona.Privilegio_idPrivilegio = 1; `
     connection.query(query, async (err, respuesta, fields) => {
         if (err) return console.log("Error", err);
 
