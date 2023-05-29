@@ -74,6 +74,15 @@
                                                     const data = {
                                                         labels: ['hace dos meses', 'mes anterior', 'este mes'],
                                                         datasets: [
+
+                                                            {
+                                                                label: 'Consumo de azucar',
+                                                                backgroundColor: 'rgba(187, 53, 0, 0.8)',
+                                                                borderColor: 'rgba(151, 43, 1, 0.8)',
+                                                                fill: false,
+                                                                borderWidth: 1,
+                                                                data: ['<%=azucar2%>', '<%=azucar1%>', '<%=azucar0%>'],
+                                                            },
                                                             {
                                                                 label: 'Consumo de la semana',
                                                                 backgroundColor: 'rgba(54, 162, 235, 0.2)',

@@ -168,8 +168,7 @@
 
                                 <li class="nav-item"><a class="nav-link" id="item-1-3-tab-1" role="tab"
                                         aria-controls="item-1-3" aria-selected="false" href="#item-1-3"
-                                        data-bs-toggle="tab" style="color: rgb(15,200,244);font-weight: bold;">Frec
-                                        B</a></li>
+                                        data-bs-toggle="tab" style="color: rgb(15,200,244);font-weight: bold;">Deficit</a></li>
                             </ul>
                         </div>
                         <div class="card-body" style="border: 2px solid rgb(204,238,254) ;">
@@ -197,8 +196,14 @@
 
                                 </div>
                                 <div id="item-1-3" class="tab-pane fade" role="tabpanel" aria-labelledby="item-1-3-tab">
-                                    <h4>Frecuencia</h4>
-                                    <p>Amongus</p><button class="btn btn-primary" type="button">Button</button>
+                                    <h4>Deficit</h4>
+
+                                    <% if(Math.sign(diferencia)=='-1' ){ %>
+                                        <p>Te has excedido tu objetivo de consumo de agua por <%=(diferencia) * -1 %> ml </p>
+                                        <% } else {%>
+                                            <p>Estas a <%=diferencia%> ml de tu meta de agua el dia de hoy</p>
+                                        <%}%>
+
                                 </div>
                             </div>
                         </div>

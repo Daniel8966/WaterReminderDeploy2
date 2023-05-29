@@ -114,6 +114,8 @@ router.get('/', manageSession('grafica- semanal'), (req, res, next) => {
             req.session.promedioMes = false;
         }
 
+        let diferencia = parseInt(req.session.meta) - parseInt(numero7);
+
         res.render('graficaSemana', {
             numero1,
             numero2,
@@ -125,6 +127,7 @@ router.get('/', manageSession('grafica- semanal'), (req, res, next) => {
             azucar1, azucar2, azucar3, azucar4, azucar5, azucar6, azucar7,
             promedioSemanal: Math.trunc(promedio),
             promedioMes: req.session.promedioMes,
+            diferencia: diferencia,
             meta: req.session.meta
         });
 
@@ -152,7 +155,7 @@ router.get('/regAguaMes', manageSession('grafica - mensual'), (req, res, next) =
         azucar0 = results[0].azucarSuma;
         var mes1 = (parseInt(fechaHora.getMonth()))
 
-        
+
         var query1 = `SELECT SUM(Consumo_Total) as sumita, SUM(azucar) as azucarSuma FROM consumo_agua WHERE MONTH(Fecha) = (${mes1}) and Persona_idPersona = ${idPersona}`
         connection.query(query1, (error, results) => {
             if (error) throw error;
@@ -167,7 +170,20 @@ router.get('/regAguaMes', manageSession('grafica - mensual'), (req, res, next) =
                 sum2 = results[0].sumita;
                 azucar2 = results[0].azucarSuma;
                 const sums = [sum0, sum1, sum2];
-                console.log('el array de sumas es : ' + sums)
+                const azucars = [azucar0, azucar1, azucar2];
+
+                //poner 0 si obtenemos nulls en los arrays
+                function azucarsCero(azucars) {
+                    for (let i = 0; i < azucars.length; i++) {
+                        if (azucars[i] === null) {
+                            console.log(`caso ${i} null`);
+                            azucars[i] = 0;
+                        }
+                    }
+                    console.log(azucars)
+                }
+
+                azucarsCero(azucars);
 
                 function promedioMes(sums) {
                     var promedioMensual = 0;
@@ -176,6 +192,7 @@ router.get('/regAguaMes', manageSession('grafica - mensual'), (req, res, next) =
                             console.log(`caso ${i} null`);
                             sums[i] = 0;
                         }
+
                         promedioMensual += parseInt(sums[i]);
                     }
                     promedioMensual = promedioMensual / 3
@@ -187,7 +204,6 @@ router.get('/regAguaMes', manageSession('grafica - mensual'), (req, res, next) =
                 req.session.promedioMes = promedio
 
                 frecuencia = meta_agua - promedio
-                console.log(meta_agua + ' - ' + promedio + ' = ' + frecuencia);
                 res.render('graficaMes', {
                     sum0, sum1, sum2, azucar0, azucar1, azucar2,
                     meta: meta_agua,
