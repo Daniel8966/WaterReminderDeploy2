@@ -30,6 +30,8 @@ router.get('/', manageSession('Perfil'), (req, res, next) => {
 
         res.render('../views/perfil',
             {
+                
+                imgPerfilSexo : respuesta[0].Sexo_idsexo,
                 nombre: respuesta[0].Usuario,
                 sexo: sexo,
                 email: respuesta[0].email,
@@ -67,7 +69,8 @@ router.get('/editarPerfil', manageSession('editar perfil'), (req, res, next) => 
         }
 
         res.render('Editar',
-            {
+            {   
+                imgPerfilSexo : respuesta[0].Sexo_idsexo,
                 nombre: respuesta[0].Usuario,
                 sexo: sexo,
                 email: respuesta[0].email,

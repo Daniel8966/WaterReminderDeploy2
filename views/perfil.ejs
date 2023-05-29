@@ -27,19 +27,22 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-dark navbar-expand-lg fixed-top portfolio-navbar gradient" style="background: linear-gradient(120deg, #125de0, #0effff);height: 6rem;width: 100%;">
-    <div class="container"><a class="navbar-brand logo" href="#">WR</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarNav"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item item"><a class="nav-link active" href="/home">Home</a></li>
-            <li class="nav-item item"><a class="nav-link" href="/regAgua">Registro</a></li>
-            <li class="nav-item item"><a class="nav-link" href="/refrescos">Otras Bebidas</a></li>
-            <li class="nav-item item"><a class="nav-link" href="/grupos">Grupos</a></li>
-            <li class="nav-item item"><a class="nav-link" href="/perfil">Perfil</a></li>
+  <nav class="navbar navbar-dark navbar-expand-lg fixed-top portfolio-navbar gradient"
+    style="background: linear-gradient(120deg, #125de0, #0effff);height: 6rem;width: 100%;">
+    <div class="container"><a class="navbar-brand logo" href="#">WR</a><button data-bs-toggle="collapse"
+        class="navbar-toggler" data-bs-target="#navbarNav"><span class="visually-hidden">Toggle navigation</span><span
+          class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item item"><a class="nav-link active" href="/home">Home</a></li>
+          <li class="nav-item item"><a class="nav-link" href="/regAgua">Registro</a></li>
+          <li class="nav-item item"><a class="nav-link" href="/refrescos">Otras Bebidas</a></li>
+          <li class="nav-item item"><a class="nav-link" href="/grupos">Grupos</a></li>
+          <li class="nav-item item"><a class="nav-link" href="/perfil">Perfil</a></li>
         </ul>
-        </div>
+      </div>
     </div>
-</nav>
+  </nav>
   <div class="container">
     <div class="main-body">
 
@@ -49,14 +52,19 @@
           <div class="card">
             <div class="card-body">
               <div class="d-flex flex-column align-items-center text-center">
-                <img src="assets/img/perfil2.png" alt="Admin" class="rounded-circle"
-                  width="150">
-                <div class="mt-3">
-                  <h4>Nombre : <%=nombre%>
-                  </h4>
-                  <p class="text-secondary mb-1">Usuario de Water Reminder</p>
-                  <a href="/logout"><button class="btn btn-primary" href="/logout">Cerrar sesión</button></a>
-                </div>
+                <% if (imgPerfilSexo==1 ){ %>
+                  <img src="assets/img/perfil1.png" alt="Admin" class="rounded-circle" width="150">
+
+                  <%}else{ %>
+                    <img src="assets/img/perfil2.png" alt="Admin" class="rounded-circle" width="150">
+                    <% } %>
+                     
+                      <div class="mt-3">
+                        <h4>Nombre : <%=nombre%>
+                        </h4>
+                        <p class="text-secondary mb-1">Usuario de Water Reminder</p>
+                        <a href="/logout"><button class="btn btn-primary" href="/logout">Cerrar sesión</button></a>
+                      </div>
               </div>
             </div>
           </div>
