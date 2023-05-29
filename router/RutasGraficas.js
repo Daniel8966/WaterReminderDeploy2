@@ -1,7 +1,7 @@
 
 import express from 'express';
 const router = express.Router();
-import manageSession   from '../middlewares/sesiones.js';
+import manageSession from '../middlewares/sesiones.js';
 import { connection } from '../database/DatabaseConexion.js'
 
 
@@ -96,7 +96,7 @@ router.get('/', manageSession('grafica- semanal'), (req, res, next) => {
             + parseInt(results0[5].suma_consumo)
             + parseInt(results0[6].suma_consumo)) / 7;
 
-        
+        req.session.promedioSemanal = Math.trunc(promedio);
         const numeros = {};
         for (let i = 0; i < results0.length; i++) {
             numeros[`numero${i + 1}`] = results0[i].suma_consumo;
@@ -109,7 +109,12 @@ router.get('/', manageSession('grafica- semanal'), (req, res, next) => {
         const [numero1, numero2, numero3, numero4, numero5, numero6, numero7] = results0.map(({ suma_consumo }) => suma_consumo);
 
         const [azucar1, azucar2, azucar3, azucar4, azucar5, azucar6, azucar7] = results0.map(({ suma_azucar }) => suma_azucar);
-        res.render('graficaSeamana', {
+
+        if (!req.session.promedioMes) {
+            req.session.promedioMes = false;
+        }
+
+        res.render('graficaSemana', {
             numero1,
             numero2,
             numero3,
@@ -118,8 +123,8 @@ router.get('/', manageSession('grafica- semanal'), (req, res, next) => {
             numero6,
             numero7,
             azucar1, azucar2, azucar3, azucar4, azucar5, azucar6, azucar7,
-
-            promedio: Math.trunc(promedio),
+            promedioSemanal: Math.trunc(promedio),
+            promedioMes: req.session.promedioMes,
             meta: req.session.meta
         });
 
@@ -136,41 +141,60 @@ router.get('/regAguaMes', manageSession('grafica - mensual'), (req, res, next) =
     var mes = (parseInt(fechaHora.getMonth()) + 1)
     const dia = (parseInt(fechaHora.getDate()))
     const idPersona = req.session.idPersona;
+    const meta_agua = req.session.meta;
 
+    let sum0, sum1, sum2, azucar0, azucar1, azucar2, promedio, frecuencia = 0;
 
-    let sum0, sum1, sum2 = 0;
-
-    var query0 = `SELECT SUM(Consumo_Total) as sumita FROM consumo_agua WHERE MONTH(Fecha) = (${mes}) and Persona_idPersona = ${idPersona}`
+    var query0 = `SELECT SUM(Consumo_Total) as sumita ,  SUM(azucar) as azucarSuma FROM consumo_agua WHERE MONTH(Fecha) = (${mes}) and Persona_idPersona = ${idPersona}`
     connection.query(query0, (error, results) => {
         if (error) throw error;
-        console.log(query0)
-        console.log('---------------caso: ' + 0 + "-------------")
-        console.log(`fecha: ${anio}-${mes}-${dia}`)
-
         sum0 = results[0].sumita;
-        console.log('caso 0: ' + sum0);
+        azucar0 = results[0].azucarSuma;
         var mes1 = (parseInt(fechaHora.getMonth()))
-        var query1 = `SELECT SUM(Consumo_Total) as sumita FROM consumo_agua WHERE MONTH(Fecha) = (${mes1}) and Persona_idPersona = ${idPersona}`
 
+        
+        var query1 = `SELECT SUM(Consumo_Total) as sumita, SUM(azucar) as azucarSuma FROM consumo_agua WHERE MONTH(Fecha) = (${mes1}) and Persona_idPersona = ${idPersona}`
         connection.query(query1, (error, results) => {
             if (error) throw error;
-            console.log(query1)
-            console.log('---------------caso: ' + 1 + "-------------")
-            console.log(`fecha: ${anio}-${mes}-${dia}`)
-
             sum1 = results[0].sumita;
-            console.log('caso 0: ' + sum1);
+            azucar1 = results[0].azucarSuma;
             var mes2 = (parseInt(fechaHora.getMonth()) - 1)
-            var query2 = `SELECT SUM(Consumo_Total) as sumita FROM consumo_agua WHERE MONTH(Fecha) = (${mes2}) and Persona_idPersona = ${idPersona}`
 
+
+            var query2 = `SELECT SUM(Consumo_Total) as sumita , SUM(azucar) as azucarSuma   FROM consumo_agua WHERE MONTH(Fecha) = (${mes2}) and Persona_idPersona = ${idPersona}`
             connection.query(query2, (error, results) => {
                 if (error) throw error;
-                console.log(query2)
-                console.log('---------------caso: ' + 2 + "-------------")
-                console.log(`fecha: ${anio}-${mes}-${dia}`)
                 sum2 = results[0].sumita;
-                console.log('caso 0: ' + sum2);
-                res.render('graficaMes', { sum0, sum1, sum2, meta: req.session.meta, promedio: 1 })
+                azucar2 = results[0].azucarSuma;
+                const sums = [sum0, sum1, sum2];
+                console.log('el array de sumas es : ' + sums)
+
+                function promedioMes(sums) {
+                    var promedioMensual = 0;
+                    for (let i = 0; i < sums.length; i++) {
+                        if (sums[i] === null) {
+                            console.log(`caso ${i} null`);
+                            sums[i] = 0;
+                        }
+                        promedioMensual += parseInt(sums[i]);
+                    }
+                    promedioMensual = promedioMensual / 3
+                    return parseInt(promedioMensual);
+                }
+
+
+                promedio = parseInt(promedioMes(sums))
+                req.session.promedioMes = promedio
+
+                frecuencia = meta_agua - promedio
+                console.log(meta_agua + ' - ' + promedio + ' = ' + frecuencia);
+                res.render('graficaMes', {
+                    sum0, sum1, sum2, azucar0, azucar1, azucar2,
+                    meta: meta_agua,
+                    promedioMes: promedio,
+                    promedioSemanal: req.session.promedioSemanal,
+                    frecuencia: frecuencia
+                })
             })
 
         })

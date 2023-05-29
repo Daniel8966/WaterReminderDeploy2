@@ -31,16 +31,19 @@
 </head>
 
 <body onload="showResults1()">
-    <nav class="navbar navbar-dark navbar-expand-lg fixed-top portfolio-navbar gradient" style="background: linear-gradient(120deg, #125de0, #0effff);height: 6rem;width: 100%;">
-        <div class="container"><a class="navbar-brand logo" href="#">WR</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarNav"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top portfolio-navbar gradient"
+        style="background: linear-gradient(120deg, #125de0, #0effff);height: 6rem;width: 100%;">
+        <div class="container"><a class="navbar-brand logo" href="#">WR</a><button data-bs-toggle="collapse"
+                class="navbar-toggler" data-bs-target="#navbarNav"><span class="visually-hidden">Toggle
+                    navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav ms-auto">
-                <li class="nav-item item"><a class="nav-link active" href="/home">Home</a></li>
-                <li class="nav-item item"><a class="nav-link" href="/regAgua">Registro</a></li>
-                <li class="nav-item item"><a class="nav-link" href="/refrescos">Otras Bebidas</a></li>
-                <li class="nav-item item"><a class="nav-link" href="/grupos">Grupos</a></li>
-                <li class="nav-item item"><a class="nav-link" href="/perfil">Perfil</a></li>
-            </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item item"><a class="nav-link active" href="/home">Home</a></li>
+                    <li class="nav-item item"><a class="nav-link" href="/regAgua">Registro</a></li>
+                    <li class="nav-item item"><a class="nav-link" href="/refrescos">Otras Bebidas</a></li>
+                    <li class="nav-item item"><a class="nav-link" href="/grupos">Grupos</a></li>
+                    <li class="nav-item item"><a class="nav-link" href="/perfil">Perfil</a></li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -76,7 +79,7 @@
                                                                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                                                                 borderColor: 'rgba(54, 162, 235, 1)',
                                                                 borderWidth: 1,
-                                                                data: [ '<%=sum2%>', '<%=sum1%>', '<%=sum0%>'],
+                                                                data: ['<%=sum2%>', '<%=sum1%>', '<%=sum0%>'],
                                                             }, {
                                                                 label: "meta de agua",
                                                                 type: "line",
@@ -120,15 +123,15 @@
                                             </div>
                                             <ul class="fa-ul"></ul>
                                             <a href="/regAgua"><button
-                                                class="btn btn-outline-primary text-capitalize d-block text-uppercase w-100"
-                                                type="button"
-                                                style="max-width: 200px;font-size: 15px;margin-top: -2%;margin-left: 17%;">Semanal</button></a>
+                                                    class="btn btn-outline-primary text-capitalize d-block text-uppercase w-100"
+                                                    type="button"
+                                                    style="max-width: 200px;font-size: 15px;margin-top: -2%;margin-left: 17%;">Semanal</button></a>
 
-                                                
+
                                             <a href="/regAgua/regAguaMes"><button
-                                                class="btn btn-outline-primary text-capitalize d-block text-uppercase w-100"
-                                                type="button"
-                                                style="max-width: 200px;margin-top: -9%;margin-left: 55%;/*max-height: 5%;*/font-size: 15px;">Mensual</button></a>
+                                                    class="btn btn-outline-primary text-capitalize d-block text-uppercase w-100"
+                                                    type="button"
+                                                    style="max-width: 200px;margin-top: -9%;margin-left: 55%;/*max-height: 5%;*/font-size: 15px;">Mensual</button></a>
                                         </div>
                                     </div>
                                 </div>
@@ -147,11 +150,11 @@
                             <ul class="nav nav-tabs card-header-tabs" role="tablist">
                                 <li class="nav-item"><a class="nav-link active" id="item-1-1-tab" role="tab"
                                         aria-controls="item-1-1" aria-selected="true" href="#item-1-1"
-                                        data-bs-toggle="tab">Prom S</a></li>
+                                        data-bs-toggle="tab">Prom M</a></li>
                                 <li class="nav-item"><a class="nav-link" id="item-1-2-tab" role="tab"
                                         aria-controls="item-1-2" aria-selected="false" href="#item-1-2"
                                         data-bs-toggle="tab" style="color: rgb(15,200,244);font-weight: bold;">Prom
-                                        M</a></li>
+                                        S</a></li>
                                 <li class="nav-item"><a class="nav-link" id="item-1-3-tab" role="tab"
                                         aria-controls="item-1-3" aria-selected="false" href="#item-1-3"
                                         data-bs-toggle="tab" style="font-weight: bold;color: rgb(15,200,244);">Prom
@@ -166,20 +169,17 @@
                             <div id="nav-tabContent" class="tab-content">
                                 <div id="item-1-1" class="tab-pane fade show active" role="tabpanel"
                                     aria-labelledby="item-1-1-tab">
-                                    <h4>Promedio Semanal</h4>
-                                    <p>Usted a tomado <%=promedio%> ml por dia en promedio</p>
+                                    <h4>Promedio Mensual</h4>
+                                    <p>Usted a tomado <%=promedioMes%> ml por mes en promedio</p>
                                 </div>
                                 <div id="item-1-2" class="tab-pane fade" role="tabpanel" aria-labelledby="item-1-2-tab">
-                                    <h4>Second Item Title</h4>
-                                    <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus
-                                        ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-                                        metus.</p><button class="btn btn-primary" type="button">Button</button>
+                                    <h4>Promedio Semanal</h4>
+                                    <p>Usted a tomado <%=promedioSemanal%> ml por semana en promedio</p>
                                 </div>
                                 <div id="item-1-3" class="tab-pane fade" role="tabpanel" aria-labelledby="item-1-3-tab">
-                                    <h4>Third Item Title</h4>
-                                    <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus
-                                        ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-                                        metus.</p><button class="btn btn-primary" type="button">Button</button>
+                                    <h4>frecuencia</h4>
+                                    <p>Te encuentras a solo <%=frecuencia%> ml de llegar a tu meta de agua</p>
+
                                 </div>
                             </div>
                         </div>

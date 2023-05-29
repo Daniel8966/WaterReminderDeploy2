@@ -165,10 +165,7 @@
                                         aria-controls="item-1-2" aria-selected="false" href="#item-1-2"
                                         data-bs-toggle="tab" style="color: rgb(15,200,244);font-weight: bold;">Prom
                                         M</a></li>
-                                <li class="nav-item"><a class="nav-link" id="item-1-3-tab" role="tab"
-                                        aria-controls="item-1-3" aria-selected="false" href="#item-1-3"
-                                        data-bs-toggle="tab" style="font-weight: bold;color: rgb(15,200,244);">Prom
-                                        F</a></li>
+
                                 <li class="nav-item"><a class="nav-link" id="item-1-3-tab-1" role="tab"
                                         aria-controls="item-1-3" aria-selected="false" href="#item-1-3"
                                         data-bs-toggle="tab" style="color: rgb(15,200,244);font-weight: bold;">Frec
@@ -180,19 +177,28 @@
                                 <div id="item-1-1" class="tab-pane fade show active" role="tabpanel"
                                     aria-labelledby="item-1-1-tab">
                                     <h4>Promedio Semanal</h4>
-                                    <p>Usted a tomado <%=promedio%> ml por dia en promedio</p>
+                                    <p>Usted a tomado <%=promedioSemanal%> ml por dia en promedio</p>
                                 </div>
                                 <div id="item-1-2" class="tab-pane fade" role="tabpanel" aria-labelledby="item-1-2-tab">
-                                    <h4>Second Item Title</h4>
-                                    <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus
-                                        ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-                                        metus.</p><button class="btn btn-primary" type="button">Button</button>
+                                    <h4>Promedio Mensual</h4>
+                                    <% if (promedioMes){ %>
+                                        <p>
+                                            Usted a tomado <%=promedioMes%> ml por mes en promedio
+                                        </p>
+                                        <%}else{ %>
+
+                                            <p>
+                                                Calcula tu promedio Mensual en la grafica mensual primero
+                                            </p> <a href="/regAgua/regAguaMes"><button class="btn btn-primary"
+                                                    type="button">Grafica Mensual</button></a>
+                                            <% } %>
+
+
+
                                 </div>
                                 <div id="item-1-3" class="tab-pane fade" role="tabpanel" aria-labelledby="item-1-3-tab">
-                                    <h4>Third Item Title</h4>
-                                    <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus
-                                        ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-                                        metus.</p><button class="btn btn-primary" type="button">Button</button>
+                                    <h4>Frecuencia</h4>
+                                    <p>Amongus</p><button class="btn btn-primary" type="button">Button</button>
                                 </div>
                             </div>
                         </div>
