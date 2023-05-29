@@ -49,7 +49,7 @@
             <section class="portfolio-block mobile-app gradient" style="margin-top: -1%;background: white;">
                 <h2 class="text-capitalize"
                     style="text-align: center;margin-top: -2%;height: 55px;font-weight: bold;color: rgb(16,180,240);">
-                    Hola!  <%=nombre%>
+                    Hola! <%=nombre%>
                 </h2>
                 <h2 style="text-align: center;color: rgb(16,185,242);font-weight: bold;font-size: 28px;">Hoy debes
                     consumir : <%=Math.trunc(tuAgua)%>ml
@@ -96,7 +96,7 @@
                                                 <th class="text-center" style="background: #1188e8;"></th>
                                                 <th class="text-center" style="background: #0ea0ff;">Consumo de agua
                                                 </th>
-                                                <th class="text-center" style="background: #0ea0ff;">Azucar                                                 </th>
+                                                <th class="text-center" style="background: #0ea0ff;">Azucar </th>
                                                 <th class="text-center" style="background: #0ea0ff;">Fecha</th>
                                                 <th class="text-center filter-false sorter-false"
                                                     style="background: #0ea0ff;">Acciones</th>
@@ -112,17 +112,25 @@
                                                             <%= user.Consumo_Total %> mL
                                                         </td>
                                                         <td>
-                                                            <%= user.azucar %> gramos 
+                                                            <%= user.azucar %> gramos
                                                         </td>
                                                         <td>
-                                                            <%= user.Fecha %>
+                                                            <% let fecha= String(user.Fecha);  %>
+                                                            <%  let fechaSplit = fecha.split("00:00:00")  %>
+                                                                <%=fechaSplit[0]%>
                                                         </td>
                                                         <td class="text-center align-middle"
                                                             style="max-height: 60px;height: 60px;">
-                                                            <input type="hidden" value="<%=user.idConsumo_Agua%>" name="id">
+                                                            <input type="hidden" value="<%=user.idConsumo_Agua%>"
+                                                                name="id">
 
-                                                            <a onclick="event.preventDefault(); document.getElementById('borrar-registro').submit();" class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover" role="button" style="margin-left: 5px;" data-bs-toggle="modal" data-bs-target="#delete-modal" href="#"><i class="fas fa-trash btnNoBorders" style="color: #ffc107;"></i></a>
-                                 
+                                                            <a onclick="event.preventDefault(); document.getElementById('borrar-registro').submit();"
+                                                                class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover"
+                                                                role="button" style="margin-left: 5px;"
+                                                                data-bs-toggle="modal" data-bs-target="#delete-modal"
+                                                                href="#"><i class="fas fa-trash btnNoBorders"
+                                                                    style="color: #ffc107;"></i></a>
+
                                                         </td>
                                                     </tr>
                                                 </form>
