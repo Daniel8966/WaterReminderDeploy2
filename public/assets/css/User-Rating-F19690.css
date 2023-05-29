@@ -36,18 +36,22 @@
 }
 
 .side {
+  padding-left: 15px;
+  padding-top: 10px;
   float: left;
   width: 15%;
   margin-top: 10px;
 }
 
 .middle {
+  padding-top: 10px;
   margin-top: 10px;
   float: left;
-  width: 70%;
+  width: 55%;
 }
 
 .right {
+  padding-top: 10px;
   text-align: right;
 }
 

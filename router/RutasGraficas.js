@@ -96,6 +96,7 @@ router.get('/', manageSession('grafica- semanal'), (req, res, next) => {
             + parseInt(results0[5].suma_consumo)
             + parseInt(results0[6].suma_consumo)) / 7;
 
+        
         const numeros = {};
         for (let i = 0; i < results0.length; i++) {
             numeros[`numero${i + 1}`] = results0[i].suma_consumo;

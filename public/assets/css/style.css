@@ -4,6 +4,7 @@
 	border-collapse: collapse;
     max-width: 300px;;
 	margin-left: auto;
+  text-decoration: none;
 	margin-right: auto;
   
   }
@@ -214,21 +215,20 @@ background-color: #f1f1f1;
 
 
   .search {
+    margin-top: 30px;
     width: 100%;
     position: relative;
     display: flex;
     height: 100px;
+    margin-left: 20px;
   }
   
   .searchTerm {
-    width: 200%;
-    border: 3px solid #00B4CC;
-    border-right: none;
-    padding: 5px;
+    width: 98%;
+    border: solid #10c7f5;
     height: 20px;
-    border-radius: 5px 0 0 5px;
+    border-radius: 5px;
     outline: none;
-    color: #9DBFAF;
     height: 36px;
   }
   
@@ -257,3 +257,14 @@ background-color: #f1f1f1;
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
+  .card-bodey {
+    position: relative;
+}
+
+.btn-full-width {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}

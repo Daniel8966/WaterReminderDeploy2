@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>pruebita</title>
+    <title>Grupo</title>
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee&amp;display=swap">
@@ -58,11 +58,10 @@
                             class="fa fa-star checked">&nbsp;</span><span class="fa fa-star checked">&nbsp;</span><span
                             class="fa fa-star checked">&nbsp;</span><span class="fa fa-star checked">&nbsp;</span><span
                             class="fa fa-star">&nbsp;</span>
-                        <p>Su consumo es de 500mL</p>
                         <hr style="border:3px solid #f1f1f1">
                         <div class="rg-row">
                             <% respuesta.forEach((user)=>{ %>
-                                <div class="side">
+                                <div  style="width: 130px;" class="side">
                                     <div><span>
                                             <%=user.nombre%>
                                         </span></div>
@@ -72,7 +71,7 @@
                                         <div class="bar-5" style="width: 50%;"></div>
                                     </div>
                                 </div>
-                                <div class="side right">
+                                <div class="side right" style="width: 100px;">
                                     <div><span>meta: <%=user.meta_agua%></span></div>
                                 </div>
                                 <%})%>
@@ -81,7 +80,7 @@
                                             <input type="hidden" name="codigo" value="<%=codigo%>">
                                             <input type="submit" class="btn btn-primary" data-bss-hover-animate="rubberBand"
                                             type="submit"
-                                            style="position: static;display: inline-block;margin-left: 30%;background: rgb(233, 6, 6); border-color:rgb(233, 6, 6) ;margin-top: 1rem; color: black;"
+                                            style="position: static;display: inline-block;margin-left: 30%;background: #52b4e8; border-color: #52b4e8 ;margin-top: 1rem; color: white;"
                                             value="Borrar">
                                             
                                        
