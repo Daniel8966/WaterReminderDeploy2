@@ -96,6 +96,7 @@ CREATE TABLE IF NOT EXISTS `railway`.`datos_bebida` (
 CREATE TABLE IF NOT EXISTS `railway`.`consumo_agua` (
   `idConsumo_Agua` INT NOT NULL AUTO_INCREMENT,
   `Consumo_Total` INT NULL DEFAULT NULL,
+  `azucar` INT NULL,
   `Fecha` DATE NULL DEFAULT NULL,
   `Persona_idPersona` INT NOT NULL,
   `datos_bebida_idRegistro_bebida` INT NOT NULL,
