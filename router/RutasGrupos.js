@@ -82,12 +82,12 @@ router.get('/grupo/:idGrupo', manageSession('grupo - participantes'), (req, res,
 
                 //esta funcion nos ayuda a obtener la suma de los consumos diarios de cada usuario  
                 //con base a la respuesta que es un array de la consulta anterior
-                
+
                 const obtenerConsumos = async (respuesta) => {
                     for (let i = 0; i < respuesta.length; i++) {
                         console.log('valor de i es igual a: ' + i);
 
-                        const query = `SELECT SUM(Consumo_total) AS sumaConsumo, Persona_idPersona AS idPersona FROM consumo_Agua WHERE fecha = ? AND Persona_idPersona = ? GROUP BY Persona_idPersona`;
+                        const query = `SELECT SUM(Consumo_total) AS sumaConsumo, Persona_idPersona AS idPersona FROM consumo_agua WHERE fecha = ? AND Persona_idPersona = ? GROUP BY Persona_idPersona`;
 
                         const idPersona = respuesta[i].idPersona;
 
