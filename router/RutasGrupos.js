@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import manageSession   from '../middlewares/sesiones.js';
+import manageSession from '../middlewares/sesiones.js';
 import { connection } from '../database/DatabaseConexion.js'
 
 //obtener la lista de grupos a los que pertenece el usuario
@@ -25,6 +25,23 @@ router.get('/', manageSession('grupos lista'), (req, res, next) => {
 //consultar un grupo y sus participantes
 router.get('/grupo/:idGrupo', manageSession('grupo - participantes'), (req, res, next) => {
 
+    //consultar un grupo al que el usuario ya se a unido, establecer permisos de administrador y salir
+    //consultar meta de agua de cada usuarios y porcentaje con respecto al consumo por dia 
+
+
+    //primero obtener la fecha de hoy esto nos servira para la query
+
+    const fechaActual = new Date();
+
+    const formatoFecha = (fecha) => {
+        const year = fecha.getFullYear();
+        const month = fecha.getMonth() + 1 < 10 ? `0${fecha.getMonth() + 1}` : fecha.getMonth() + 1;
+        const day = fecha.getDate() < 10 ? `0${fecha.getDate()}` : fecha.getDate();
+        //regresar un string con formato desiado
+        return `${year}-${month}-${day}`;
+    }
+
+    formatoFecha(fechaActual);
 
 
     const idGrupo = req.params.idGrupo;
@@ -60,17 +77,65 @@ router.get('/grupo/:idGrupo', manageSession('grupo - participantes'), (req, res,
                 var codigo = respuesta[0].idGrupo;
                 var nombreGrupo = respuesta[0].Nombre_Grupo;
 
-                console.log('el id del admin es: ' + admin)
-                if (req.session.idPersona == admin) {
-                    console.log('el usuario' + nombre + ' es admin');
-                    var admon = 1;
-                    res.render('grupo', { respuesta: respuesta, codigo, nombreGrupo, admon, nombre })
-                } else {
-                    console.log('el usuario' + nombre + ' no  es admin');
-                    var admon = 0;
-                    res.render('grupo', { respuesta: respuesta, codigo, nombreGrupo, admon, nombre })
-                }
 
+                const consumos = [];
+
+                //esta funcion nos ayuda a obtener la suma de los consumos diarios de cada usuario  
+                //con base a la respuesta que es un array de la consulta anterior
+                
+                const obtenerConsumos = async (respuesta) => {
+                    for (let i = 0; i < respuesta.length; i++) {
+                        console.log('valor de i es igual a: ' + i);
+
+                        const query = `SELECT SUM(Consumo_total) AS sumaConsumo, Persona_idPersona AS idPersona FROM consumo_Agua WHERE fecha = ? AND Persona_idPersona = ? GROUP BY Persona_idPersona`;
+
+                        const idPersona = respuesta[i].idPersona;
+
+
+                        try {
+                            const respuestadois = await new Promise((resolve, reject) => {
+                                connection.query(query, [fechaActual, idPersona], (error2, result) => {
+                                    if (error2) {
+                                        console.log("error al seleccionar" + error2);
+                                        reject(error2);
+                                    } else {
+                                        resolve(result);
+                                    }
+                                });
+                            });
+
+                            if (respuestadois.length > 0) {
+                                consumos.push(respuestadois[0].sumaConsumo);
+                            } else {
+                                consumos.push(0);
+                            }
+                        } catch (error) {
+                            console.log("error en la consulta: " + error);
+                            throw error;
+                        }
+                    }
+
+                    console.log('los consumos son: ' + consumos);
+
+                    console.log('el id del admin es: ' + admin)
+                    if (req.session.idPersona == admin) {
+                        console.log('el usuario' + nombre + ' es admin');
+                        let admon = 1;
+
+                        res.render('grupo', { respuesta: respuesta, consumos: consumos, codigo, nombreGrupo, admon, nombre })
+
+                    } else {
+                        console.log('el usuario' + nombre + ' no  es admin');
+                        let admon = 0;
+                        res.render('grupo', { respuesta: respuesta, consumos: consumos, codigo, nombreGrupo, admon, nombre })
+                    }
+
+
+
+                };
+                console.log('los siguen siendo' + consumos);
+
+                obtenerConsumos(respuesta);
 
             }
         })
