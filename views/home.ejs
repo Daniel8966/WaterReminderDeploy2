@@ -115,8 +115,20 @@
                                                             <%= user.azucar %> gramos
                                                         </td>
                                                         <td>
-                                                            <% let fecha= String(user.Fecha);  %>
-                                                            <%  let fechaSplit = fecha.split("00:00:00")  %>
+                                                            <% //Traducir fecha al es-419 (espanol)
+
+                                                            const formatoFecha = new Intl.DateTimeFormat('es-419', {
+                                                                year: 'numeric',
+                                                                month: 'long',
+                                                                day: 'numeric',
+                                                                hour: 'numeric',
+                                                                minute: 'numeric',
+                                                                second: 'numeric',
+                                                                hour12: false
+                                                              });
+                                                              const fechaFormateada = formatoFecha.format(user.fecha); %>
+                                                            
+                                                            <%  let fechaSplit = fechaFormateada.split(",")  %>
                                                                 <%=fechaSplit[0]%>
                                                         </td>
                                                         <td class="text-center align-middle"
