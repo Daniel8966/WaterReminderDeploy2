@@ -6,7 +6,7 @@ import bodyParser from 'body-parser';
 //------INVOCANDO BCRYPTJS------ (Seguridad)
 import bycryptjs from 'bcryptjs';
 //--------CONEXION A BASE DE DATOS---------
-import {connection} from './database/DatabaseConexion.js'
+import { connection } from './database/DatabaseConexion.js'
 //procesar variables dotenv del hosteo
 import dotenv from 'dotenv';
 //Resolver dirname
@@ -52,20 +52,28 @@ app.set('view engine', 'ejs');
 
 
 
-
 //------VARS DE SESION
 
+import crypto from 'crypto'
+function generateSecretKey(length) {
+    return crypto.randomBytes(length).toString('hex');
+}
+
+const secretKey = generateSecretKey(32);
+
 app.use(session({
-    secret: 'secret',
-    resave: true,
-    saveUninitialized: true
+    secret: secretKey,
+    resave: false,
+    saveUninitialized: false
 }));
 
 //CERRAR SESION
-app.get('/logout', (req, res) => {
+app.get('/logout', (req, res, next) => {
     req.session.destroy(() => {
+        res.clearCookie('connect.sid');
         console.log('Sesion cerrada')
         res.redirect('/')
+
     })
 })
 
@@ -74,12 +82,12 @@ app.get('/logout', (req, res) => {
 
 app.use('/', rutasIndex)
 
-app.use('/register', rutasUsuarioRegistro );
+app.use('/register', rutasUsuarioRegistro);
 
 app.use('/auth', rutasUsuarioLogin);
 
 
-app.use('/home' , rutasHome );
+app.use('/home', rutasHome);
 
 //------BACK DE FUNCIONES DEL SISTEMA------
 
