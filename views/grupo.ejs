@@ -62,6 +62,10 @@
                                 <% respuesta.forEach((user)=>{ 
                                     
                                     let porcentaje = parseInt(consumos[i])/(parseInt(user.meta_agua) / 100);
+
+                                    if (porcentaje >= 100){
+                                        porcentaje = 100;
+                                    }
                                     %>
                                     <div style="width: 130px;" class="side">
                                         <div><span>
@@ -70,11 +74,19 @@
                                     </div>
                                     <div class="middle">
                                         <div class="bar-container">
-                                            <div class="bar-5" style="width: <%=porcentaje%>%"></div>
+                                            <% if (porcentaje == 100){ %>
+                                                <div class="bar-3" style="width: <%=porcentaje%>%"></div>
+
+
+                                                <%}else{ %>
+                                                    
+                                                    <div class="bar-5" style="width: <%=porcentaje%>%"></div>
+                                                 <%} %>
+                                           
                                         </div>
                                     </div>
                                     <div class="side right" style="width: 100px;">
-                                        <%  %>
+                                       
                                             <div><span>meta: <%=user.meta_agua%> mL</span>
                                             </div>
                                     </div>

@@ -31,7 +31,7 @@ router.get('/grupo/:idGrupo', manageSession('grupo - participantes'), (req, res,
 
     //primero obtener la fecha de hoy esto nos servira para la query
 
-    const fechaActual = new Date();
+    let fechaActual = new Date();
 
     const formatoFecha = (fecha) => {
         const year = fecha.getFullYear();
@@ -41,7 +41,9 @@ router.get('/grupo/:idGrupo', manageSession('grupo - participantes'), (req, res,
         return `${year}-${month}-${day}`;
     }
 
-    formatoFecha(fechaActual);
+    fechaActual = formatoFecha(fechaActual);
+
+    console.log('el dia de hoy es: ' + fechaActual);
 
 
     const idGrupo = req.params.idGrupo;
