@@ -98,19 +98,36 @@ router.post('/actualizarPerfil', manageSession('actualizar datos perfil'), async
     const edad = req.body.edad;
     const hora_desp = req.body.despertar;
     const hora_dormir = req.body.dormir;
-
+    const sexo = req.body.sexo;
     const Actividad_fisica = req.body.actFisica;
 
     //Calcular la nueva meta de agua con base a los nuevos parametros
-    function calcularMeta(peso, altura, actividad) {
-        const consumoIdeal = 66 + (13.7 * parseFloat(peso)) + (5 * parseFloat(altura)) - (6.5 * 20)
+    function calcularMeta(peso, altura, edad, actividad) {
 
-        console.log(`Debes tomar ${consumoIdeal}`)
-        return consumoIdeal
+
+        if (sexo == 'hombre') {
+            let consumITO = Math.sqrt(parseInt(peso) * parseInt(altura) / 3600) * 10
+            let consumoPeso = peso * 35;
+            let consumoTiempo = (actividad * 5 * 0.0175 * peso * 1.3)
+            let consumoIdeal = parseFloat(consumITO) + + parseFloat(consumoPeso) + parseFloat(consumoTiempo);
+
+
+            console.log(`Debes tomar ${consumoIdeal}`)
+            return Math.trunc(consumoIdeal);
+
+        } else if (sexo == 'mujer') {
+            let consumITO = Math.sqrt(parseInt(peso) * parseInt(altura) / 3600) * 10
+            let consumoPeso = peso * 33;
+            let consumoTiempo = (actividad * 4 * 0.0175 * peso * 1)
+            let consumoIdeal = parseFloat(consumITO) + + parseFloat(consumoPeso) + parseFloat(consumoTiempo);
+
+            console.log(`Debes tomar ${consumoIdeal}`)
+            return Math.trunc(consumoIdeal);
+        }
 
     }
 
-    const meta_agua = calcularMeta(peso, altura, Actividad_fisica);
+    const meta_agua = calcularMeta(peso, altura, edad, Actividad_fisica);
     Math.trunc(meta_agua);
 
     const query0 = `select password from usuario where idUsuario = ?   `;
@@ -120,7 +137,6 @@ router.post('/actualizarPerfil', manageSession('actualizar datos perfil'), async
             console.log(err)
             return res.redirect('/perfil')
         } else {
-            console.log(respuesta[0].password)
             const checkPasswor = await comparar(password, respuesta[0].password)
             console.log(checkPasswor);
 

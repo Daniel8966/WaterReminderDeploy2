@@ -10,7 +10,7 @@ const router = express.Router();
 router.get('/', manageSession('home'), (req, res, next) => {
 
     //BACK CONSUMO DE AGUA IDEAL
-    connection.query(' SELECT peso,altura,edad,Actividad_fisica FROM persona WHERE idPersona="' + req.session.idPersona + '"', (error, results) => {
+    connection.query(' SELECT peso,altura,edad,Actividad_fisica FROM persona WHERE idPersona= ? ', [req.session.idPersona], (error, results) => {
         if (error) throw error;
         req.session.peso = results[0].peso
         req.session.altura = results[0].altura
