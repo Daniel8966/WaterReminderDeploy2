@@ -102,7 +102,7 @@ router.post('/actualizarPerfil', manageSession('actualizar datos perfil'), async
     const Actividad_fisica = req.body.actFisica;
 
     //Calcular la nueva meta de agua con base a los nuevos parametros
-    function calcularMeta(peso, altura, edad, actividad) {
+    function calcularMeta(peso, altura, actividad) {
 
 
         if (sexo == 'hombre') {
@@ -128,6 +128,7 @@ router.post('/actualizarPerfil', manageSession('actualizar datos perfil'), async
     }
 
     const meta_agua = calcularMeta(peso, altura, edad, Actividad_fisica);
+    console.log('la nueva meta de agua es : ' + meta_agua)
     Math.trunc(meta_agua);
 
     const query0 = `select password from usuario where idUsuario = ?   `;

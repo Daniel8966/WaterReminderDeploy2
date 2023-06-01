@@ -17,20 +17,8 @@ router.post('/', async (req, res, next) => {
     const hora_desp = req.body.despertar;
     const hora_dormir = req.body.dormir;
     const Actividad_fisica = req.body.actFisica;
-    var sexo = req.body.sexo;
+    let sexo = req.body.sexo;
     const privilegio = 1;
-    
-    //Calcular la nueva meta de agua con base a los nuevos parametros
-    function calcularMeta(peso, altura, actividad) {
-        const consumoIdeal = 66 + (13.7 * parseFloat(peso)) + (5 * parseFloat(altura)) - (6.5 * 20)
-
-        console.log(`Debes tomar ${consumoIdeal}`)
-        return consumoIdeal
-
-    }
-
-    const meta_agua = calcularMeta(peso, altura, Actividad_fisica);
-    Math.trunc(meta_agua);
 
     if (sexo == 'Hombre') {
         sexo = 1;
@@ -39,8 +27,39 @@ router.post('/', async (req, res, next) => {
     } else {
         console.log('valores cambiados en el sexo;')
         console.log('el email ya esta registrado')
-        return res.redirect('404', '/registrarse', { mensaje: false })
+        return res.redirect('/registrarse', '404', { mensaje: false })
     }
+    
+    //Calcular la nueva meta de agua con base a los nuevos parametros
+    function calcularMeta(peso, altura, actividad) {
+
+
+        if (sexo == '1') {
+            let consumITO = Math.sqrt(parseInt(peso) * parseInt(altura) / 3600) * 10
+            let consumoPeso = peso * 35;
+            let consumoTiempo = (actividad * 5 * 0.0175 * peso * 1.3)
+            let consumoIdeal = parseFloat(consumITO) + + parseFloat(consumoPeso) + parseFloat(consumoTiempo);
+
+
+            console.log(`Debes tomar ${consumoIdeal}`)
+            return Math.trunc(consumoIdeal);
+
+        } else if (sexo  == '2') {
+            let consumITO = Math.sqrt(parseInt(peso) * parseInt(altura) / 3600) * 10
+            let consumoPeso = peso * 33;
+            let consumoTiempo = (actividad * 4 * 0.0175 * peso * 1)
+            let consumoIdeal = parseFloat(consumITO) + + parseFloat(consumoPeso) + parseFloat(consumoTiempo);
+
+            console.log(`Debes tomar ${consumoIdeal}`)
+            return Math.trunc(consumoIdeal);
+        }
+
+    }
+
+    const meta_agua = calcularMeta(peso, altura, Actividad_fisica);
+    Math.trunc(meta_agua);
+
+    
 
     //Aqui se encripta la contraseña
     const passwordHash = await encriptar(password);

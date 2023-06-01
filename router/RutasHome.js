@@ -10,9 +10,10 @@ const router = express.Router();
 router.get('/', manageSession('home'), (req, res, next) => {
 
     //BACK CONSUMO DE AGUA IDEAL
-    connection.query(' SELECT peso,altura,edad,Actividad_fisica FROM persona WHERE idPersona= ? ', [req.session.idPersona], (error, results) => {
+    connection.query(' SELECT Sexo_idsexo, peso,altura,edad,Actividad_fisica FROM persona WHERE idPersona= ? ', [req.session.idPersona], (error, results) => {
         if (error) throw error;
         req.session.peso = results[0].peso
+        req.session.sexo = results[0].Sexo_idsexo
         req.session.altura = results[0].altura
         req.session.Actividad_fisica = results[0].Actividad_fisica
     })
@@ -33,13 +34,27 @@ router.get('/', manageSession('home'), (req, res, next) => {
 
         function calcularMeta(peso, altura, actividad) {
 
-            const consumoIdeal2 = parseFloat(peso) + parseFloat(altura) +
-                parseFloat(actividad)
-            const consumoIdeal = 66 + (13.7 * parseFloat(peso)) + (5 * parseFloat(altura)) - (6.5 * 20)
-            req.session.meta = consumoIdeal;
-            console.log(`Debes tomar ${consumoIdeal}`)
-            return consumoIdeal
 
+            if (req.session.sexo == '1') {
+                let consumITO = Math.sqrt(parseInt(peso) * parseInt(altura) / 3600) * 10
+                let consumoPeso = peso * 35;
+                let consumoTiempo = (actividad * 5 * 0.0175 * peso * 1.3)
+                let consumoIdeal = parseFloat(consumITO) + + parseFloat(consumoPeso) + parseFloat(consumoTiempo);
+    
+    
+                console.log(`Debes tomar ${consumoIdeal}`)
+                return Math.trunc(consumoIdeal);
+    
+            } else if (req.session.sexo  == '2') {
+                let consumITO = Math.sqrt(parseInt(peso) * parseInt(altura) / 3600) * 10
+                let consumoPeso = peso * 33;
+                let consumoTiempo = (actividad * 4 * 0.0175 * peso * 1)
+                let consumoIdeal = parseFloat(consumITO) + + parseFloat(consumoPeso) + parseFloat(consumoTiempo);
+    
+                console.log(`Debes tomar ${consumoIdeal}`)
+                return Math.trunc(consumoIdeal);
+            }
+    
         }
 
         req.session.meta = calcularMeta(req.session.peso, req.session.altura, req.session.Actividad_fisica)
