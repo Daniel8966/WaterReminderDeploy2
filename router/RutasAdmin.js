@@ -106,12 +106,12 @@ router.post('/registros', sesionAdmin('admin pruebas'), manageSession('admin pru
                 querygrandota += `(null, ${randomConsumo}, 0,  '${fechas[i]}' , ${idPersona} , 1 ,1)`
             }
             else {
-                querygrandota += `(null, ${randomConsumo}, 0,  '${fechas[i]}' , ${idPersona} , 1 ,1),`
+                querygrandota += `(null, ${randomConsumo}, 0,'${fechas[i]}' , ${idPersona} , 1 ,1),`
             }
 
 
         }
-        return (querygrandota += `;`);
+        return querygrandota 
 
     }
 
