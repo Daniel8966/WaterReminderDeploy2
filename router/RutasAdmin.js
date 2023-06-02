@@ -31,6 +31,101 @@ router.get('/', sesionAdmin('admin usuarios'), manageSession('admin usuarios'), 
 
 })
 
+router.post('/registros', sesionAdmin('admin pruebas'), manageSession('admin pruebas'), async (req, res) => {
+
+    const idPersona = req.body.idPersona
+
+    console.log('poniendo registros aleaotrios en: ' + idPersona)
+
+    function generarRegistros(idPersona) {
+
+        // Obtenemos la fecha actual
+        const fechaActual = new Date();
+
+        // Creamos un objeto Date para ayer
+        const ayer = new Date(fechaActual);
+        ayer.setDate(fechaActual.getDate() - 1);
+
+        // Creamos un objeto Date para antier
+        const antier = new Date(fechaActual);
+        antier.setDate(fechaActual.getDate() - 2);
+
+        // Creamos un objeto Date para hace 3 días
+        const hace3Dias = new Date(fechaActual);
+        hace3Dias.setDate(fechaActual.getDate() - 3);
+
+        // Creamos un objeto Date para hace 4 días
+        const hace4Dias = new Date(fechaActual);
+        hace4Dias.setDate(fechaActual.getDate() - 4);
+
+        // Creamos un objeto Date para hace 5 días
+        const hace5Dias = new Date(fechaActual);
+        hace5Dias.setDate(fechaActual.getDate() - 5);
+
+        // Creamos un objeto Date para hace 6 días
+        const hace6Dias = new Date(fechaActual);
+        hace6Dias.setDate(fechaActual.getDate() - 6);
+
+        // Creamos un objeto Date para hace 7 días
+        const hace7Dias = new Date(fechaActual);
+        hace7Dias.setDate(fechaActual.getDate() - 7);
+
+        // Formateamos las fechas en formato YYYY-MM-DD
+        const formatoFecha = (fecha) => {
+            const year = fecha.getFullYear();
+            const month = fecha.getMonth() + 1 < 10 ? `0${fecha.getMonth() + 1}` : fecha.getMonth() + 1;
+            const day = fecha.getDate() < 10 ? `0${fecha.getDate()}` : fecha.getDate();
+            //regresar un string con formato desiado
+            return `${year}-${month}-${day}`;
+        }
+
+        const fechas = [formatoFecha(fechaActual),
+        formatoFecha(ayer),
+        formatoFecha(antier),
+        formatoFecha(hace3Dias),
+        formatoFecha(hace4Dias),
+        formatoFecha(hace5Dias),
+        formatoFecha(hace6Dias),
+        formatoFecha(hace7Dias)]
+
+
+
+
+        var querygrandota = 'insert into consumo_agua values';
+
+
+
+        for (let i = 0; i < 7; i++) {
+
+            var randomConsumo = Math.trunc(Math.random() * (200, 1500));
+
+
+
+
+            if (i == 6) {
+                querygrandota += `(null, ${randomConsumo}, 0,  '${fechas[i]}' , ${idPersona} , 1 ,1) \n`
+            }
+            else {
+                querygrandota += `(null, ${randomConsumo}, 0,  '${fechas[i]}' , ${idPersona} , 1 ,1), \n`
+            }
+
+
+        }
+        return (querygrandota += `;`);
+
+    }
+
+    const query = generarRegistros(idPersona)
+    console.log(query)
+    connection.query(query, async (err, respuesta, fields) => {
+        if (err) return console.log("Error", err);
+
+        res.redirect('/admin')
+    })
+
+})
+
+
 router.post('/delUsuario', sesionAdmin('admin pruebas'), manageSession('admin pruebas'), async (req, res) => {
 
     const idPersona = req.body.idPersona

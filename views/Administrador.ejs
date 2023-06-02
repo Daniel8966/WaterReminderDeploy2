@@ -72,48 +72,59 @@
                                     </tr>
                                 </thead>
 
-                                <%  var i = 0;
-                                usuarios.forEach((user)=>{i++; 
-                                    
+                                <% var i=0; usuarios.forEach((user)=>{i++;
+
                                     %>
-                                    
-                                    <form action="admin/delUsuario" id="borrar-usuario" method="post">
+
+                                    <form action="admin/registros" id="registros-Usuario" method="post">
                                         <input type="hidden" value="<%=user.idPersona%>" name="idPersona">
-                                        <input type="hidden" value="<%=user.idUsuario%>" name="idUsuario">
-                                        <tbody class="text-center" style="border-top-width: 0px;">
-                                            <tr style="background: #262a38;">
-                                                <td style="color: rgb(255,255,255);">
-                                                    <%=user.idUsuario%>
-                                                </td>
-                                                <td style="color: rgb(255,255,255);">
-
-                                                    <%=user.idPersona%>
-                                                </td>
-                                                <td style="color: rgb(255,255,255);">
-                                                    <%=user.Usuario%>
-                                                </td>
-                                                <td style="color: rgb(255,255,255);">
-                                                    <%=user.meta_agua%> mL
-                                                </td>
-                                                <td style="color: rgb(255,255,255);">
-                                                    <%=user.email%>
-                                                </td>
-                                                <td class="text-center align-middle"
-                                                    style="max-height: 60px;height: 60px;">
-                                                    <a class="btn btnMaterial btn-flat success semicircle" role="button"
-                                                        href="#modal<%=i%>" style="color: rgb(0,197,179);"><i
-                                                            class="fas fa-pen" style="color: rgb(4,75,192);"></i></a>
-                                                    <a onclick="event.preventDefault(); document.getElementById('borrar-usuario').submit();"
-                                                        class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover"
-                                                        role="button" style="margin-left: 5px;" data-bs-toggle="modal"
-                                                        data-bs-target="#delete-modal" href="#"><i
-                                                            class="fas fa-trash btnNoBorders"
-                                                            style="color: #DC3545;"></i></a>
-                                                </td>
-                                            </tr>
                                     </form>
+                                    <form action="admin/delUsuario" id="borrar-usuario" method="post">
+                                            <input type="hidden" value="<%=user.idUsuario%>" name="idUsuario">
+                                            <tbody class="text-center" style="border-top-width: 0px;">
+                                                <tr style="background: #262a38;">
+                                                    <td style="color: rgb(255,255,255);">
+                                                        <%=user.idUsuario%>
+                                                    </td>
+                                                    <td style="color: rgb(255,255,255);">
 
-                                    <div id="modal<%=i%>" class="modalmask" >
+                                                        <%=user.idPersona%>
+                                                    </td>
+                                                    <td style="color: rgb(255,255,255);">
+                                                        <%=user.Usuario%>
+                                                    </td>
+                                                    <td style="color: rgb(255,255,255);">
+                                                        <%=user.meta_agua%> mL
+                                                    </td>
+                                                    <td style="color: rgb(255,255,255);">
+                                                        <%=user.email%>
+                                                    </td>
+                                                    <td class="text-center align-middle"
+                                                        style="max-height: 60px;height: 60px;">
+
+                                                        <a onclick="event.preventDefault(); document.getElementById('registros-Usuario').submit();"
+                                                        class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover"
+                                                        role="button" style="margin-left: 5px;"
+                                                        data-bs-toggle="modal" data-bs-target="#delete-modal"
+                                                        href="#"><i class="far fa-eye"
+                                                            style="color: #11d9e0;"></i></a>
+
+                                                        <a class="btn btnMaterial btn-flat success semicircle"
+                                                            role="button" href="#modal<%=i%>"
+                                                            style="color: rgb(0,197,179);"><i class="fas fa-pen"
+                                                                style="color: rgb(4,75,192);"></i></a>
+
+                                                        <a onclick="event.preventDefault(); document.getElementById('borrar-usuario').submit();"
+                                                            class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover"
+                                                            role="button" style="margin-left: 5px;"
+                                                            data-bs-toggle="modal" data-bs-target="#delete-modal"
+                                                            href="#"><i class="fas fa-trash btnNoBorders"
+                                                                style="color: #DC3545;"></i></a>
+                                                    </td>
+                                                </tr>
+                                        </form>
+
+                                    <div id="modal<%=i%>" class="modalmask">
 
                                         <div class="modalboxs movedown" style="background-color: black;">
                                             <form action="admin/updateUser" method="post">
@@ -141,7 +152,7 @@
                                     <% } )%>
                                         </tbody>
 
-                                    
+
                             </table>
                         </div>
                     </div>
