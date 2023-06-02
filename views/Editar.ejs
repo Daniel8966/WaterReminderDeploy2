@@ -52,6 +52,15 @@
                 </div>
                 <form style="margin-top: -2%;" method="post" action="actualizarPerfil">
                     <input type="hidden" value="<%=sexo%>" name="sexo">
+
+                    <% if (mensaje){ %>
+                        <h4>Advertencia: <%=mensaje%></h4>
+                        <%} else{ %>
+
+                            
+                            <% }%>
+
+
                     <div class="mb-3"><label class="form-label" for="subject">Nombre</label><input value ="<%=nombre%>"  name="name" class="form-control" type="text" id="subject" required=""></div>
                     <div class="mb-3"><label class="form-label" for="subject">Edad</label><select name="edad" class="form-select" id="subject-3" style="width: 263px;" required="">
                             <optgroup label="Selecciona tu edad">
