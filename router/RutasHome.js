@@ -69,6 +69,8 @@ router.get('/', manageSession('home'), (req, res, next) => {
 router.post('/addWater', manageSession('consumo de agua'), (req, res, next) => {
 
     const cantidad = req.body.taza;
+
+  
     const fechaHora = new Date();
     const anio = fechaHora.getFullYear()
     const mes = (parseInt(fechaHora.getMonth()) + 1)

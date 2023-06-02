@@ -91,7 +91,7 @@ router.post('/registros', sesionAdmin('admin pruebas'), manageSession('admin pru
 
 
 
-        var querygrandota = 'insert into consumo_agua values';
+        var querygrandota = 'INSERT INTO consumo_agua VALUES ';
 
 
 
@@ -103,10 +103,10 @@ router.post('/registros', sesionAdmin('admin pruebas'), manageSession('admin pru
 
 
             if (i == 6) {
-                querygrandota += `(null, ${randomConsumo}, 0,  '${fechas[i]}' , ${idPersona} , 1 ,1) \n`
+                querygrandota += `(null, ${randomConsumo}, 0,  '${fechas[i]}' , ${idPersona} , 1 ,1)`
             }
             else {
-                querygrandota += `(null, ${randomConsumo}, 0,  '${fechas[i]}' , ${idPersona} , 1 ,1), \n`
+                querygrandota += `(null, ${randomConsumo}, 0,  '${fechas[i]}' , ${idPersona} , 1 ,1),`
             }
 
 
