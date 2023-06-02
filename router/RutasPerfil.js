@@ -66,9 +66,9 @@ router.get('/editarPerfil', manageSession('editar perfil'), (req, res, next) => 
         //evaluar si es hombre o mujer 1, 2
         let sexo = respuesta[0].Sexo_idsexo;
         if (sexo == 1) {
-            sexo = 'hombre'
+            sexo = 'Hombre'
         } else if (sexo == 2) {
-            sexo = 'mujer'
+            sexo = 'Mujer'
         }
 
         res.render('Editar',
@@ -113,7 +113,7 @@ router.post('/actualizarPerfil', manageSession('actualizar datos perfil'), async
     function calcularMeta(peso, altura, actividad) {
 
 
-        if (sexo == 'hombre') {
+        if (sexo == 'Hombre') {
             let consumITO = Math.sqrt(parseInt(peso) * parseInt(altura) / 3600) * 10
             let consumoPeso = peso * 35;
             let consumoTiempo = (actividad * 5 * 0.0175 * peso * 1.3)
@@ -123,7 +123,7 @@ router.post('/actualizarPerfil', manageSession('actualizar datos perfil'), async
             console.log(`Debes tomar ${consumoIdeal}`)
             return Math.trunc(consumoIdeal);
 
-        } else if (sexo == 'mujer') {
+        } else if (sexo == 'Mujer') {
             let consumITO = Math.sqrt(parseInt(peso) * parseInt(altura) / 3600) * 10
             let consumoPeso = peso * 33;
             let consumoTiempo = (actividad * 4 * 0.0175 * peso * 1)
