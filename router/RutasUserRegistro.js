@@ -20,16 +20,49 @@ router.post('/', async (req, res, next) => {
     let sexo = req.body.sexo;
     const privilegio = 1;
 
+  
+    // Validar campos vacíos
+    if (!nombre || !email || !password || !peso || !altura || !edad || !hora_desp || !hora_dormir || !Actividad_fisica || !sexo) {
+        return res.status(400).render('registrar', { mensaje: 'Todos los campos deben ser completados' });
+    }
+
+    // Validar caracteres especiales
+    const regex = /^[a-zA-Z0-9\s]*$/;
+    if (!regex.test(nombre) || !regex.test(Actividad_fisica) || !regex.test(sexo) || !regex.test(peso.toString()) || !regex.test(altura)) {
+        return res.status(400).render('registrar', { mensaje: 'Los campos contienen caracteres especiales no permitidos' });
+    }
+
+    // Validar longitud de la contraseña
+    if (password.length <= 3) {
+        return res.status(400).render('registrar', { mensaje: 'La contraseña debe tener al menos 3 caracteres' });
+    }
+
+    // Validar rangos de edad, peso y altura
+    if (edad < 18 || edad > 80 || peso < 30 || peso > 250 || altura < 100 || altura > 250) {
+        return res.status(400).render('registrar', { mensaje: 'Los valores ingresados para edad, peso o altura no son válidos' });
+    }
+
+    // Validar sexo
+    if (sexo !== 'Hombre' && sexo !== 'Mujer') {
+        return res.status(400).render('registrar', { mensaje: 'El valor ingresado para el sexo no es válido' });
+    }
+
+    // Validar formato de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        return res.status(400).render('registrar', { mensaje: 'El formato del correo electrónico no es válido' });
+    }
+
     if (sexo == 'Hombre') {
         sexo = 1;
     } else if (sexo == 'Mujer') {
         sexo = 2;
     } else {
         console.log('valores cambiados en el sexo;')
-        console.log('el email ya esta registrado')
         return res.redirect('/registrarse', '404', { mensaje: false })
     }
-    
+
+
     //Calcular la nueva meta de agua con base a los nuevos parametros
     function calcularMeta(peso, altura, actividad) {
 
@@ -44,7 +77,7 @@ router.post('/', async (req, res, next) => {
             console.log(`Debes tomar ${consumoIdeal}`)
             return Math.trunc(consumoIdeal);
 
-        } else if (sexo  == '2') {
+        } else if (sexo == '2') {
             let consumITO = Math.sqrt(parseInt(peso) * parseInt(altura) / 3600) * 10
             let consumoPeso = peso * 33;
             let consumoTiempo = (actividad * 4 * 0.0175 * peso * 1)
@@ -59,7 +92,7 @@ router.post('/', async (req, res, next) => {
     const meta_agua = calcularMeta(peso, altura, Actividad_fisica);
     Math.trunc(meta_agua);
 
-    
+
 
     //Aqui se encripta la contraseña
     const passwordHash = await encriptar(password);
@@ -75,8 +108,8 @@ router.post('/', async (req, res, next) => {
 
         }
         if (respuesta.length > 0) {
-            console.log('el email ya esta registrado')
-            return res.render('registrar', { mensaje: true })
+            console.log('el email ya esta registrado');
+            return res.render('registrar', { mensaje: 'Error: El email ya esta registrado' })
 
         } else {
             //si no esta registrado, registrar al nuevo usuario : 
