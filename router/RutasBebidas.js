@@ -87,10 +87,10 @@ router.post('/addEnerjuice', manageSession('energeticas - bebidas'), (req, res, 
       const agua = req.body.agua;
       
       const azucar = req.body.azucar;
-      console.log('el azucar es: ' + azucarTotal)
+
       const azucarTotal = parseFloat((parseFloat(azucar) * parseInt(consumo))/200)
       Math.trunc(azucarTotal);
-      console.log('el azucar TOTTAL  es: ' + azucar)
+
 
       const cantidad = (parseInt(consumo) * parseInt(agua)) / 200;
       
