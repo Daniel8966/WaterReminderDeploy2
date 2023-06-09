@@ -22,7 +22,7 @@ function sesionAdmin(nombre) {
 //------RUTAS DE LAS PAGINAS------
 router.get('/', sesionAdmin('admin usuarios'), manageSession('admin usuarios'), async (req, res) => {
 
-    const query = `SELECT  idUsuario, idPersona, Usuario, meta_agua,  email FROM persona INNER JOIN usuario ON persona.Usuario_idUsuario=usuario.idUsuario where persona.Privilegio_idPrivilegio = 1; `
+    const query = `SELECT  idUsuario, idPersona, Usuario, meta_agua,  email FROM persona INNER JOIN usuario ON persona.Usuario_idUsuario=usuario.idUsuario where persona.Privilegio_idPrivilegio = 1 and usuario.Sesion = 0 ; `
     connection.query(query, async (err, respuesta, fields) => {
         if (err) return console.log("Error", err);
 
@@ -138,28 +138,34 @@ router.post('/delUsuario', sesionAdmin('admin pruebas'), manageSession('admin pr
       ON t1. CGrupos_idCGrupos = t2.idCGrupos WHERE t2.adminID = ? ;`
     connection.query(query1, [idPersona], async (err, respuesta, fields) => {
         if (err) return console.log("Error", err);
+        console.log("borrado exitoso en participantes");
+
     })
 
     //Borrar grupos que el usuario creo
     const query2 = `delete from cgrupos where adminID = ?;`
     connection.query(query2, [idPersona], async (err, respuesta, fields) => {
         if (err) return console.log("Error", err);
+        console.log("borrado exitoso en grupos")
     })
 
     //Borrar los consumos del usuario 
     const query3 = `delete from consumo_agua where Persona_idPersona = ? ; `
     connection.query(query3, [idPersona], async (err, respuesta, fields) => {
         if (err) return console.log("Error", err);
+        console.log("borrado exitoso en consumos")
+
     })
 
     //Borrar a la persona 
     const query5 = `delete from persona where idPersona = ?`
     connection.query(query5, [idPersona], async (err, respuesta, fields) => {
         if (err) return console.log("Error", err);
+        console.log("borrado exitoso en persona")
     })
 
     //Borrar el usuario 
-    const query4 = `delete from usuario where idUsuario = ? `
+    const query4 = `update usuario set Sesion = 1 where idUsuario = ? `
     connection.query(query4, [idUsuario], async (err, respuesta, fields) => {
         if (err) return console.log("Error", err);
         return res.redirect('/admin');
